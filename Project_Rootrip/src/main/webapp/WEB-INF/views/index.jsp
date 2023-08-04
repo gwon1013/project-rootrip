@@ -4,9 +4,36 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>index.jsp</title>
 </head>
 <body>
-	<h1>Project-Rootrip 시작합시다</h1>
+	<table>
+		<tr>
+			<td>
+				<table>
+					<tr>
+						<td align="left">Rootrip</td>
+						<td align="right">loginarea 쪽</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<td align="center">
+					<td>contentpage 쪽</td>
+	</tr>
+
+	</table>
+
+	<table>
+	<tr>
+		<td>회원정보</td>
+	</tr>
+	<tr>
+		<td>로그아웃</td>
+	</tr>
+	</table>
 </body>
 </html>
