@@ -29,10 +29,10 @@
 
 	<table>
 	<tr>
-		<td>회원정보</td>
+		<td><a href="#">회원정보</a></td>
 	</tr>
 	<tr>
-		<td>로그아웃</td>
+		<td><a href="#">로그아웃</a></td>
 	</tr>
 	</table>
 </body>
