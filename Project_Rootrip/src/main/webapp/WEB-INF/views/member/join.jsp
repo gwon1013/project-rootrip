@@ -7,6 +7,7 @@
 <title>join.jsp</title>
 </head>
 <body>
+	<h2>회원가입</h2>
 	<form action="#">
 		<table>
 		<tr>
