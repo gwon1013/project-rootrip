@@ -4,9 +4,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>member/login</title>
 </head>
 <body>
-	<h1>로그인페이지</h1>
+	<form action="#">
+		<table>
+			<tr>
+				<td>ID</td>
+				<td><input id="" name="" placeholder="아이디"></td>
+			</tr>
+			<tr>
+				<td>PW</td>
+				<td><input id="" name="" placeholder="비밀번호" type="password"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><button>login</button></td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>
