@@ -7,15 +7,15 @@
 <title>member/login</title>
 </head>
 <body>
-	<form action="#">
+	<form action="login" method="post">
 		<table>
 			<tr>
 				<td>ID</td>
-				<td><input id="" name="" placeholder="아이디"></td>
+				<td><input id="" name="u_mail" placeholder="이메일"></td>
 			</tr>
 			<tr>
 				<td>PW</td>
-				<td><input id="" name="" placeholder="비밀번호" type="password"></td>
+				<td><input id="" name="u_pw" placeholder="비밀번호" type="password"></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><button>login</button></td>

@@ -4,29 +4,23 @@ import java.math.BigDecimal;
 
 // javabean
 public class Member {
-	private BigDecimal u_no;
 	private String u_mail;
 	private String u_pw;
 	private String u_nickname;
+	private String u_profile;
+	private BigDecimal u_type;
 	
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Member(BigDecimal u_no, String u_mail, String u_pw, String u_nickname) {
+	public Member(String u_mail, String u_pw, String u_nickname, String u_profile, BigDecimal u_type) {
 		super();
-		this.u_no = u_no;
 		this.u_mail = u_mail;
 		this.u_pw = u_pw;
 		this.u_nickname = u_nickname;
-	}
-
-	public BigDecimal getU_no() {
-		return u_no;
-	}
-
-	public void setU_no(BigDecimal u_no) {
-		this.u_no = u_no;
+		this.u_profile = u_profile;
+		this.u_type = u_type;
 	}
 
 	public String getU_mail() {
@@ -52,6 +46,21 @@ public class Member {
 	public void setU_nickname(String u_nickname) {
 		this.u_nickname = u_nickname;
 	}
-	
+
+	public String getU_profile() {
+		return u_profile;
+	}
+
+	public void setU_profile(String u_profile) {
+		this.u_profile = u_profile;
+	}
+
+	public BigDecimal getU_type() {
+		return u_type;
+	}
+
+	public void setU_type(BigDecimal u_type) {
+		this.u_type = u_type;
+	}
 	
 }

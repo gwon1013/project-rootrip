@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>index.jsp</title>
+<script type="text/javascript" src="resources/js/jQuery.js"></script>
+<script type="text/javascript" src="resources/js/Check.js"></script>
+<script type="text/javascript" src="resources/js/RootripValidChecker.js"></script>
 </head>
 <body>
 	<table>

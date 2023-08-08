@@ -9,8 +9,8 @@
 <body>
 	<table>
 	<tr>
-		<td><a href="#">로그인</a></td>
-		<td><a href="#">회원가입</a></td>
+		<td><a href="login.go">로그인</a></td>
+		<td><a href="join.go">회원가입</a></td>
 	</tr>
 	</table>
 </body>
