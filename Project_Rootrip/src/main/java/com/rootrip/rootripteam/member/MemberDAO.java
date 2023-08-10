@@ -1,9 +1,11 @@
 package com.rootrip.rootripteam.member;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -55,7 +57,59 @@ public class MemberDAO {
 	}
 	
 	public void login(Member m, HttpServletRequest req){
+		try {
+			List<Member> mList = ss.getMapper(MemberMapper.class).getMemberByMail(m);
+			if(mList.size() == 1) {
+				if(mList.get(0).getU_pw().equals(encryptPW(m.getU_pw()))) {
+					req.getSession().setAttribute("loginMember", mList.get(0));
+					req.getSession().setMaxInactiveInterval(10 * 60);
+				}
+			}
+		} 
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void logout(HttpServletRequest req) {
+		req.getSession().setAttribute("loginMember", null);
+	}
+	
+	public void drop(HttpServletRequest req) {
+		try {
+			Member m = (Member)req.getSession().getAttribute("loginMember");
+			ss.getMapper(MemberMapper.class).drop(m);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		
+	}
+	
+	public void update(Member m, HttpServletRequest req) {
+		String path = req.getSession().getServletContext().getRealPath("resources/img");
+		
+		MultipartRequest mr;
+		try {
+			mr = new MultipartRequest(req, path, 10485760, "utf-8", new DefaultFileRenamePolicy());
+			m.setU_mail(mr.getParameter("u_mail"));
+			m.setU_pw(encryptPW(mr.getParameter("u_pw")));
+			m.setU_nickname(mr.getParameter("u_nickname"));
+			
+			String photo = mr.getFilesystemName("u_profile");
+			if (photo != null) {
+				String photo_kor = URLEncoder.encode(photo, "utf-8").replace('+', ' ');
+				m.setU_profile(photo_kor);
+				ss.getMapper(MemberMapper.class).updateWithProfile(m);
+			}
+			else {
+				ss.getMapper(MemberMapper.class).updateWithoutProfile(m);
+			}
+			req.getSession().setAttribute("loginMember", m);
+			req.getSession().setMaxInactiveInterval(10 * 60);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private String encryptPW(String password) throws NoSuchAlgorithmException {

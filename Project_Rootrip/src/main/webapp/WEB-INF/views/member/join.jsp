@@ -12,26 +12,25 @@
 		<table>
 		<tr>
 				<td>E-mail</td>
-				<td align="center" colspan="2"><input id="join_id" name="u_mail" placeholder="아이디" autofocus="autofocus" ></td>
+				<td align="center"><input id="join_id" name="u_mail" placeholder="아이디" autofocus="autofocus" ></td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td align="center" colspan="2"><input name="u_pw" placeholder="비밀번호" type="password"></td>
+				<td align="center"><input name="u_pw" placeholder="비밀번호" type="password"></td>
 			</tr>
 			<tr>
 				<td>비밀번호 확인</td>
-				<td align="center" colspan="2"><input name="u_pw_chk" placeholder="비밀번호확인" type="password"></td>
+				<td align="center"><input name="u_pw_chk" placeholder="비밀번호확인" type="password"></td>
 			</tr>
 			<tr>
 				<td>닉네임</td>
-				<td align="center" colspan="2"><input name="u_nickname" placeholder="닉네임"></td>
-			</tr>
-			<tr>
+				<td align="center"><input name="u_nickname" placeholder="닉네임"></td>
 			</tr>
 			<tr>
 				<td>프로필 사진</td>
-				<td align="center" style="width:100px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;프사</td>
-				<td><input type="file" name="u_profile"></td>
+			</tr>
+			<tr>
+				<td><img id="j_image" src="resources/img/profile.png"></td><td><input id="j_profile" type="file" name="u_profile"></td>
 			</tr>
 			<tr>
 				<td colspan="2"><button>회원가입</button></td>

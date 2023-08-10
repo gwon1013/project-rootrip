@@ -31,6 +31,23 @@ public class MemberController {
 		return "index";
 	}
 	
+	@RequestMapping(value = "/member.drop", method = RequestMethod.GET)
+	public String drop(HttpServletRequest req) {
+		mDAO.drop(req);
+		mDAO.logout(req);
+		mDAO.loginCheck(req);
+		req.setAttribute("contentPage", "start.jsp");
+		return "index";
+	}
+	
+	@RequestMapping(value = "/member.update", method = RequestMethod.POST)
+	public String update(Member m, HttpServletRequest req) {
+		mDAO.update(m, req);
+		mDAO.loginCheck(req);
+		req.setAttribute("contentPage", "start.jsp");
+		return "index";
+	}
+	
 	@RequestMapping(value = "/login.go", method = RequestMethod.GET)
 	public String goLogin(HttpServletRequest req) {
 		mDAO.loginCheck(req);
@@ -40,9 +57,24 @@ public class MemberController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(Member m, HttpServletRequest req) {
-		mDAO.loginCheck(req);
 		mDAO.login(m, req);
+		mDAO.loginCheck(req);
 		req.setAttribute("contentPage", "start.jsp");
+		return "index";
+	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpServletRequest req) {
+		mDAO.logout(req);
+		mDAO.loginCheck(req);
+		req.setAttribute("contentPage", "start.jsp");
+		return "index";
+	}
+	
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
+	public String goInfo(HttpServletRequest req) {
+		mDAO.loginCheck(req);
+		req.setAttribute("contentPage", "member/info.jsp");
 		return "index";
 	}
 }

@@ -7,6 +7,7 @@
 <title>index.jsp</title>
 <script type="text/javascript" src="resources/js/jQuery.js"></script>
 <script type="text/javascript" src="resources/js/Check.js"></script>
+<script type="text/javascript" src="resources/js/go.js"></script>
 <script type="text/javascript" src="resources/js/RootripValidChecker.js"></script>
 </head>
 <body>
@@ -26,10 +27,10 @@
 
 	<table>
 		<tr>
-			<td><a href="#">회원정보</a></td>
+			<td><a href="info">회원정보</a></td>
 		</tr>
 		<tr>
-			<td><a href="#">로그아웃</a></td>
+			<td><a href="logout">로그아웃</a></td>
 		</tr>
 	</table>
 </body>
