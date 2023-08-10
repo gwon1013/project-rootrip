@@ -43,6 +43,7 @@
 		<beans:property name="typeAliasesPackage" value="com.rootrip.rootripteam" />
 		<beans:property name="mapperLocations">
 			<beans:list>
+			<beans:value>classpath:mapper/memberMapper.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
