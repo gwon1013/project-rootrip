@@ -8,6 +8,7 @@
 <script type="text/javascript" src="resources/js/jQuery.js"></script>
 <script type="text/javascript">
 	$(function(){
+		
 		// 질문 리스트
 		let arrTxt = [
 			"내가 여행지를 추천해줄게",
@@ -74,6 +75,28 @@
 					},
 				];
 		
+		let ansQ4 = [
+					{
+						100 : [
+							{
+								option : "지역맛집",
+								value : 101
+							},
+							{
+								option : "지역맛집",
+								value : 102
+							},
+							{
+								option : "지역맛집",
+								value : 103
+							},
+						],
+						200 : [
+							
+						]
+					},
+				];
+		
 		
 		// 다음 버튼을 눌렀을 때
 		let i = 0;
@@ -95,7 +118,7 @@
 				$.each(ansQ1,function(i, a){
 					let o = a.option;
 					let v = a.value;
-					let input = $("<input type='radio' id='"+o+"' name='Q1' value='"+v+"'/>")
+					let input = $("<input type='radio' id='"+o+"' name='Q1' value='"+v+"' onclick='getRadioVal();'/>")
 					let label = $("<label for='"+o+"'>"+o+"</label>")
 					td.append(input,label);
 				});
@@ -107,7 +130,7 @@
 				$.each(ansQ2,function(i, a){
 					let o = a.option;
 					let v = a.value;
-					let input = $("<input type='checkbox' id='"+o+"' name='Q2' value='"+v+"'/>")
+					let input = $("<input type='checkbox' id='"+o+"' name='Q2' value='"+v+"' onclick='getCheckboxVal(\"Q2\");'/>")
 					let label = $("<label for='"+o+"'>"+o+"</label>")
 					td.append(input,label);
 				});
@@ -119,16 +142,41 @@
 				$.each(ansQ3,function(i, a){
 					let o = a.option;
 					let v = a.value;
-					let input = $("<input type='checkbox' id='"+o+"' name='Q3' value='"+v+"'/>")
+					let input = $("<input type='checkbox' id='"+o+"' name='Q3' value='"+v+"'onclick='getCheckboxVal(\"Q3\");'/>")
 					let label = $("<label for='"+o+"'>"+o+"</label>")
 					td.append(input,label);
 				});
 				tr.append(td);
 				$('#visibleTb').append(tr)
+			} else if (i == 5) {
+				var arrChk = $('#Q3').val().split(",")
+				$.each(arrChk, function(i, a){
+					$.each(ansQ4,function(i, b){
+						alert(b.a);
+					});
+				});
 			}
 		});
 		
 	});
+	
+	function getRadioVal(){
+		$('#Q1').val($("input:radio[name='Q1']:checked").val());
+	};
+	
+	function getCheckboxVal(a){
+		var arrChk = [];
+		$("input[name='"+a+"']").each(function(){
+		    if( $(this).is(":checked") == true ){
+		    	var checkVal = $(this).val();
+				arrChk.push(checkVal);	      
+		    }
+		})
+		$("#"+a).val(arrChk);
+	};
+	
+	
+	
 </script>
 </head>
 <body>
