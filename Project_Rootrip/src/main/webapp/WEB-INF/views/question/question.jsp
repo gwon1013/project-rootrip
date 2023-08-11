@@ -77,26 +77,26 @@
 		
 		let ansQ4 = [
 					{
-						100 : [
+						"c100" : [
 							{
 								option : "지역맛집",
 								value : 101
 							},
 							{
-								option : "지역맛집",
+								option : "전통시장",
 								value : 102
 							},
 							{
-								option : "지역맛집",
+								option : "카페",
 								value : 103
 							},
-						],
-						200 : [
-							
 						]
 					},
 				];
-		
+
+		$.each(ansQ4[0].find("c100"),function(i, c) {
+			alert(c.option);
+		})
 		
 		// 다음 버튼을 눌렀을 때
 		let i = 0;
@@ -151,9 +151,19 @@
 			} else if (i == 5) {
 				var arrChk = $('#Q3').val().split(",")
 				$.each(arrChk, function(i, a){
-					$.each(ansQ4,function(i, b){
-						alert(b.a);
+					var bc = 'c'+a;
+					alert(bc);
+					let td = $('<td></td>');
+					let tr = $('<tr></tr>');
+					$.each(ansQ4[0].find(bc), function(i, b){
+						let o = b.option;
+						let v = b.value;
+						let input = $("<input type='checkbox' id='"+o+"' name='Q4' value='"+v+"'onclick='getCheckboxVal(\"Q4\");'/>")
+						let label = $("<label for='"+o+"'>"+o+"</label>")
+						td.append(input,label);
 					});
+					tr.append(td);
+					$('#visibleTb').append(tr)
 				});
 			}
 		});
