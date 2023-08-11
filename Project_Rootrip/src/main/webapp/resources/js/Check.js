@@ -46,4 +46,27 @@ function checkJoin(){
 	}
 	
 	return true;
-} 
+}
+
+function changeImage(files, profile){
+	if(files[0]) {
+		if(files[0].type.startsWith("image/")) {
+			var reader = new FileReader()
+			reader.onload = e => {
+				$(".profile_preview").attr("src", e.target.result)
+			}
+			reader.readAsDataURL(files[0]);
+			return;
+		}
+		else {
+			alert("지원하지 않는 파일입니다.");
+			document.getElementById("input_profile").value="";
+		}
+    }
+	if(!(profile == null || profile == "")) {
+		$(".profile_preview").attr("src", "resources/img/"+profile)
+	}
+	else {
+		$(".profile_preview").attr("src", "resources/img/profile.png")
+	}
+}

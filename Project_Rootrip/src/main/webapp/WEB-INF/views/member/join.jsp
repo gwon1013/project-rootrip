@@ -30,7 +30,8 @@
 				<td>프로필 사진</td>
 			</tr>
 			<tr>
-				<td><img id="j_image" src="resources/img/profile.png"></td><td><input id="j_profile" type="file" name="u_profile"></td>
+				<td><img id="j_image" class="profile_preview" src="resources/img/profile.png"></td>
+				<td><input id="input_profile" type="file" accept="image/*" name="u_profile" onchange="changeImage(this.files, ${sessionScope.loginMember});"></td>
 			</tr>
 			<tr>
 				<td colspan="2"><button>회원가입</button></td>
