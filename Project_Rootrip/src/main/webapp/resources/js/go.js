@@ -8,3 +8,7 @@ function goDrop(){
 		location.href="member.drop";
 	}
 }
+
+function goQuestion(){
+	location.href="question.question.go";
+}

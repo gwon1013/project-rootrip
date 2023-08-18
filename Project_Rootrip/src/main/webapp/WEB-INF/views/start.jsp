@@ -9,10 +9,11 @@
 <body>
 	<table>
 		<tr>
+			<td><h1>여행가고 싶다고?</h1></td>
+		</tr>
+		<tr>
 			<td>
-				<form action="#">
-					<button>시작하기</button>
-				</form>
+				<button onclick="goQuestion();">시작하기</button>
 			</td>
 		</tr>
 		<tr>
