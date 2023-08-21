@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h2>내 정보</h2>
-	<form action="member.update" method="post" enctype="multipart/form-data" name="joinForm" onsubmit="return checkJoin();">
+	<form action="member.update" method="post" enctype="multipart/form-data" name="joinForm" onsubmit="return checkUpdate();">
 		<table>
 		<tr>
 				<td>E-mail</td>
@@ -26,8 +26,6 @@
 			<tr>
 				<td>닉네임</td>
 				<td align="center"><input name="u_nickname" placeholder="닉네임" value=${sessionScope.loginMember.u_nickname }></td>
-			</tr>
-			<tr>
 			</tr>
 			<tr>
 				<td>프로필 사진</td>
