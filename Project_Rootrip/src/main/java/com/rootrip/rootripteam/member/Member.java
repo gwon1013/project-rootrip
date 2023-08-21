@@ -9,7 +9,7 @@ public class Member {
 	private String u_nickname;
 	private String u_profile;
 	private BigDecimal u_type;
-	
+
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
@@ -62,5 +62,5 @@ public class Member {
 	public void setU_type(BigDecimal u_type) {
 		this.u_type = u_type;
 	}
-	
+
 }

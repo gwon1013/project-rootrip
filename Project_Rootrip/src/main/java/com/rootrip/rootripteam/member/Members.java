@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Members {
 	private List<Member> member;
-	
+
 	public Members() {
 		// TODO Auto-generated constructor stub
 	}
@@ -21,6 +21,5 @@ public class Members {
 	public void setMember(List<Member> member) {
 		this.member = member;
 	}
-	
-	
+
 }

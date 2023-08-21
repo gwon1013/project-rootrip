@@ -11,20 +11,20 @@ import com.rootrip.rootripteam.member.MemberDAO;
 
 @Controller
 public class HomeController {
-	
+
 	@Autowired
 	private MemberDAO mDAO;
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest req) {
 		mDAO.loginCheck(req);
 		req.setAttribute("contentPage", "start.jsp");
 		return "index";
 	}
+
 	@RequestMapping(value = "/home.go", method = RequestMethod.GET)
 	public String home2(HttpServletRequest req) {
 		return home(req);
 	}
-	
-	
+
 }

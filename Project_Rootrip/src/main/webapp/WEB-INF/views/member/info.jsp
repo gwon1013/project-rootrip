@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h2>내 정보</h2>
-	<form action="member.update" method="post" enctype="multipart/form-data" name="joinForm" onsubmit="return checkJoin();">
+	<form action="member.update" method="post" enctype="multipart/form-data" name="joinForm" onsubmit="return checkUpdate();">
 		<table>
 		<tr>
 				<td>E-mail</td>
@@ -28,22 +28,20 @@
 				<td align="center"><input name="u_nickname" placeholder="닉네임" value=${sessionScope.loginMember.u_nickname }></td>
 			</tr>
 			<tr>
-			</tr>
-			<tr>
 				<td>프로필 사진</td>
 			</tr>
 			<tr>
 				<td>
 					<c:choose>
 						<c:when test="${sessionScope.loginMember.u_profile != null }">
-							<img class="profile" src="resources/img/${sessionScope.loginMember.u_profile}">
+							<img class="profile_preview" src="resources/img/${sessionScope.loginMember.u_profile}">
 						</c:when>
 						<c:when test="${sessionScope.loginMember.u_profile == null }">
-							<img class="profile" src="resources/img/profile.png">
+							<img class="profile_preview" src="resources/img/profile.png">
 						</c:when>
 					</c:choose>
 				</td>
-				<td><input id="i_profile" type="file" name="u_profile"></td>
+				<td><input id="input_profile" type="file" accept="image/*" name="u_profile"  onchange="changeImage(this.files, '${sessionScope.loginMember.u_profile}');"></td>
 			</tr>
 			<tr>
 				<td><button>정보 수정</button><input type="button" value="탈퇴하기" onclick="goDrop();"></td>
