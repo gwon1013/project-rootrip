@@ -10,5 +10,5 @@ function goDrop(){
 }
 
 function goQuestion(){
-	location.href="question.question.go";
+	location.href="recommendLoc.question.go";
 }

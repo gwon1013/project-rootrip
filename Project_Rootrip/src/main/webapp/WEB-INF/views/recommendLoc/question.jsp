@@ -319,13 +319,13 @@
 </head>
 <body>
 	<!-- 전송용 form (보이지 않도록) -->
-	<form action="#">
+	<form action="recommendLoc.result.go">
 		<table id="invisibleTb" border="1">
 			<tr>
-				<td><input id="Q1" readonly="readonly" value="0"></td>
-				<td><input id="Q2" readonly="readonly" value="0"></td>
-				<td><input id="Q3" readonly="readonly" value="0"></td>
-				<td><input id="Q4" readonly="readonly" value="0"></td>
+				<td><input id="Q1" name="Q1" readonly="readonly" value="0"></td>
+				<td><input id="Q2" name="Q2" readonly="readonly" value="0"></td>
+				<td><input id="Q3" name="Q3" readonly="readonly" value="0"></td>
+				<td><input id="Q4" name="Q4" readonly="readonly" value="0"></td>
 				<td><button id="submit_btn"></button></td>
 			</tr>
 		</table>
