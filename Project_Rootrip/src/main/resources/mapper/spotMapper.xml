@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinu.test.Spot.SpotMapper">
+	<insert id="insertMarket" parameterType="com.rootrip.rootripteam.spot.Market">
+		insert into SPOT values(spot_seq.nextval, #{s_photo, jdbcType = VARCHAR}, #{s_name}, #{s_addr_jibun, jdbcType = VARCHAR}, #{s_addr_road, jdbcType = VARCHAR}, #{s_tel, jdbcType = VARCHAR}, #{s_lat}, #{s_lon}, #{s_comment, jdbcType = VARCHAR}, #{c_no}, #{l_no})
+	</insert>
+	<insert id="insertMarket2" parameterType="com.rootrip.rootripteam.spot.Market">
+		insert into Market values(spot_seq.currval, #{m_sort}, #{m_day, jdbcType = DECIMAL})
+	</insert>
+	<insert id="insertRestaurant" parameterType="com.rootrip.rootripteam.spot.Restaurant">
+		insert into SPOT values(spot_seq.nextval, #{s_photo, jdbcType = VARCHAR}, #{s_name}, #{s_addr_jibun, jdbcType = VARCHAR}, #{s_addr_road, jdbcType = VARCHAR}, #{s_tel, jdbcType = VARCHAR}, #{s_lat}, #{s_lon}, #{s_comment, jdbcType = VARCHAR}, #{c_no}, #{l_no})
+	</insert>
+	<insert id="insertRestaurant2" parameterType="com.rootrip.rootripteam.spot.Restaurant">
+		insert into RESTAURANT values()
+	</insert>
+	<insert id="insertFestival" parameterType="com.rootrip.rootripteam.spot.Festival">
+		insert into SPOT values(spot_seq.nextval, #{s_photo, jdbcType = VARCHAR}, #{s_name}, #{s_addr_jibun, jdbcType = VARCHAR}, #{s_addr_road, jdbcType = VARCHAR}, #{s_tel, jdbcType = VARCHAR}, #{s_lat}, #{s_lon}, #{s_comment, jdbcType = VARCHAR}, #{c_no}, #{l_no})
+	</insert>
+	<insert id="insertFestival2" parameterType="com.rootrip.rootripteam.spot.Festival">
+		insert into FESTIVAL values(spot_seq.currval, #{f_s_date}, #{f_e_date})
+	</insert>
+	<insert id="insertTour" parameterType="com.rootrip.rootripteam.spot.Tour">
+		insert into SPOT values(spot_seq.nextval, #{s_photo, jdbcType = VARCHAR}, #{s_name}, #{s_addr_jibun, jdbcType = VARCHAR}, #{s_addr_road, jdbcType = VARCHAR}, #{s_tel, jdbcType = VARCHAR}, #{s_lat}, #{s_lon}, #{s_comment, jdbcType = VARCHAR}, #{c_no}, #{l_no})
+	</insert>
+	<insert id="insertTour2" parameterType="com.rootrip.rootripteam.spot.Tour">
+		insert into TOUR values(spot_seq.currval)
+	</insert>
+	<insert id="insertWellness" parameterType="com.rootrip.rootripteam.spot.Wellness">
+		insert into SPOT values(spot_seq.nextval, #{s_photo, jdbcType = VARCHAR}, #{s_name}, #{s_addr_jibun, jdbcType = VARCHAR}, #{s_addr_road, jdbcType = VARCHAR}, #{s_tel, jdbcType = VARCHAR}, #{s_lat}, #{s_lon}, #{s_comment, jdbcType = VARCHAR}, #{c_no}, #{l_no})
+	</insert>
+	<insert id="insertWellness2" parameterType="com.rootrip.rootripteam.spot.Wellness">
+		insert into WELLNESS values(spot_seq.currval)
+	</insert>
+	<insert id="insertActivity" parameterType="com.rootrip.rootripteam.spot.Activity">
+		insert into SPOT values(spot_seq.nextval, #{s_photo, jdbcType = VARCHAR}, #{s_name}, #{s_addr_jibun, jdbcType = VARCHAR}, #{s_addr_road, jdbcType = VARCHAR}, #{s_tel, jdbcType = VARCHAR}, #{s_lat}, #{s_lon}, #{s_comment, jdbcType = VARCHAR}, #{c_no}, #{l_no})
+	</insert>
+	<insert id="insertActivity2" parameterType="com.rootrip.rootripteam.spot.Activity">
+		insert into ACTIVITY values(spot_seq.currval)
+	</insert>
+</mapper>

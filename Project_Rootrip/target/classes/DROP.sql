@@ -1,0 +1,16 @@
+drop table USERS cascade constraint purge;
+drop table CATEGORY cascade constraint purge;
+drop table SPOT cascade constraint purge;
+drop table LOCATION cascade constraint purge;
+drop table COURSE cascade constraint purge;
+drop table COURSE_DETAIL cascade constraint purge;
+drop table FESTIVAL cascade constraint purge;
+drop table MARKET cascade constraint purge;
+drop table FOLLOW cascade constraint purge;
+drop table CATEGORIES_BY_LOCATION cascade constraint purge;
+drop table TOUR cascade constraint purge;
+drop table WELLNESS cascade constraint purge;
+drop table RESTAURANT cascade constraint purge;
+drop table ACCOMMODATION cascade constraint purge;
+drop table COURSE_USER cascade constraint purge;
+drop table ACTIVITY cascade constraint purge;
