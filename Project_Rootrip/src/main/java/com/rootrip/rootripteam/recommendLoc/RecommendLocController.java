@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.rootrip.rootripteam.member.MemberDAO;
+import com.rootrip.rootripteam.spot.Spot;
 
 @Controller
 public class RecommendLocController {
@@ -28,7 +29,7 @@ public class RecommendLocController {
 	
 	// 결과페이지 이동
 	@RequestMapping(value = "/recommendLoc.result.go", method = RequestMethod.GET)
-	public String goResult(HttpServletRequest req) {
+	public String goResult(HttpServletRequest req, Spot s) {
 		mDAO.loginCheck(req);
 		lDAO.getResult(req);
 		req.setAttribute("contentPage", "recommendLoc/result.jsp");

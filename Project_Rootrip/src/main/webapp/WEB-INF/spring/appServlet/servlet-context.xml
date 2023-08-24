@@ -47,6 +47,7 @@
 				<beans:value>classpath:mapper/categoryMapper.xml</beans:value>
 				<beans:value>classpath:mapper/locationMapper.xml</beans:value>
 				<beans:value>classpath:mapper/spotMapper.xml</beans:value>
+				<beans:value>classpath:mapper/recommendLocMapper.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>

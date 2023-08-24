@@ -1,15 +1,21 @@
 package com.rootrip.rootripteam.recommendLoc;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RecommendLocDAO {
+	
+	@Autowired
+	private SqlSession ss;
+	
 	public void getResult(HttpServletRequest req) {
 		try {
 			// 파라미터값 가져오기
@@ -19,47 +25,38 @@ public class RecommendLocDAO {
 			String arrQ4[] = Q4.split(",");
 			
 			// 반복문 돌려서 분류하기 
-			int a = 0;
+			int catNum = 0;
 			
-			ArrayList<String> acts = new ArrayList<String>();
-			ArrayList<String> quiets = new ArrayList<String>();
-			ArrayList<String> tours = new ArrayList<String>();
-			ArrayList<String> tastes = new ArrayList<String>();
+			ArrayList<BigDecimal> acts = new ArrayList<BigDecimal>();
+			ArrayList<BigDecimal> quiets = new ArrayList<BigDecimal>();
+			ArrayList<BigDecimal> tours = new ArrayList<BigDecimal>();
+			ArrayList<BigDecimal> tastes = new ArrayList<BigDecimal>();
 			
 			for (String q : arrQ4) {
-				a = Integer.parseInt(q);
+				catNum = Integer.parseInt(q);
 				
-				if (a/100 == 4) { // 4xx : 액티비티
-					acts.add(q);
-				} else if (a/100 == 3) { // 3xx : 휴양 
-					quiets.add(q);
-				} else if (a/100 == 2) { // 2xx : 관광
-					tours.add(q);
+				if (catNum/100 == 4) { // 4xx : 액티비티
+					acts.add(new BigDecimal(q));
+				} else if (catNum/100 == 3) { // 3xx : 휴양 
+					quiets.add(new BigDecimal(q));
+				} else if (catNum/100 == 2) { // 2xx : 관광
+					tours.add(new BigDecimal(q));
 				} else { // 1xx : 맛집
-					tastes.add(q);
+					tastes.add(new BigDecimal(q));
 				}
 			}
-//			System.out.println("액티비티");
-//			for (String s : acts) {
-//				System.out.println(s);
-//			}
-//			System.out.println("============");
-//			System.out.println("휴양");
-//			for (String s : quiets) {
-//				System.out.println(s);
-//			}
-//			System.out.println("============");
-//			System.out.println("관광");
-//			for (String s : tours) {
-//				System.out.println(s);
-//			}
-//			System.out.println("============");
-//			System.out.println("맛집");
-//			for (String s : tastes) {
-//				System.out.println(s);
-//			}
-//			System.out.println("============");
 			
+			
+			// 4xx 할 수 있는 지역 찾기
+			for (BigDecimal a : acts) {
+				System.out.println(a+"할 수 있는 곳");
+				
+				List<BigDecimal> locs = ss.getMapper(RecommendLocMapper.class).getLocByCate(a);
+				for (BigDecimal l : locs) {
+					System.out.println(l);
+				}
+				System.out.println("================");
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
