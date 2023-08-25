@@ -2,7 +2,12 @@ package com.rootrip.rootripteam.recommendLoc;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,15 +53,34 @@ public class RecommendLocDAO {
 			
 			
 			// 4xx 할 수 있는 지역 찾기
-			for (BigDecimal a : acts) {
-				System.out.println(a+"할 수 있는 곳");
-				
-				List<BigDecimal> locs = ss.getMapper(RecommendLocMapper.class).getLocByCate(a);
-				for (BigDecimal l : locs) {
-					System.out.println(l);
+			
+			// 빈 리스트 생성
+			List<BigDecimal> locs = new ArrayList<BigDecimal>();
+			// 빈 해쉬맵 생성(지역 - 갯수)
+			HashMap<BigDecimal, Integer> map = new HashMap<BigDecimal, Integer>();
+			
+			System.out.println(acts.get(0));
+			
+			try {
+				// 액티비티 중 첫번째 인덱스를 할 수 있는 지역들 불러오기
+				locs = ss.getMapper(RecommendLocMapper.class).getLocByCate(acts.get(0));
+				// 
+				Set<BigDecimal> set = new HashSet<BigDecimal>(locs);
+				for (BigDecimal s : set) {
+					System.out.println(s + ":" + Collections.frequency(locs, s));
+					map.put(s, Collections.frequency(locs, s));
 				}
-				System.out.println("================");
+				for(Entry<BigDecimal, Integer> entry : map.entrySet()) {
+					System.out.println("[key]" + entry.getKey() + "[value]" + entry.getValue());
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
+			
+			
+			
+			
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
