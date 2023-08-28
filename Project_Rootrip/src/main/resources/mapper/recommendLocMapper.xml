@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rootrip.rootripteam.recommendLoc.RecommendLocMapper">
 	<select id="getLocByCate" parameterType="BigDecimal" resultType="BigDecimal">
-		select L_NO from SPOT where C_NO = #{a} group by L_NO
+		select L_NO from SPOT where C_NO = #{c} group by L_NO order by l_no
+	</select>
+	<select id="getCateByLoc" parameterType="BigDecimal" resultType="BigDecimal">
+		select c_no from spot where l_no = #{l} and (c_no &lt; 400) group by c_no order by c_no
+	</select>
+	<select id="getLocName" parameterType="BigDecimal" resultType="String">
+		select l_name from location where l_no = #{k} 
 	</select>
 </mapper>

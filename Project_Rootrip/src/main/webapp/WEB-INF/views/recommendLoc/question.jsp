@@ -212,11 +212,14 @@
 			let tr2 = $("<tr></tr>");
 			let input = null;
 			let label = null;
-			for (var i = 0; i < ansQ2.length; i++) {
-				input = $("<input type='radio' id='"+ansQ2[i].option+"' name='Q2' value='"+ansQ2[i].value+"' onclick='getQ2Val();'/>");
-				label = $("<label for='"+ansQ2[i].option+"'>"+ansQ2[i].option+"</label>");
-				td2.append(input,label);
-			}
+			//for (var i = 0; i < ansQ2.length; i++) {
+				//input = $("<input type='radio' id='"+ansQ2[i].option+"' name='Q2' value='"+ansQ2[i].value+"' onclick='getQ2Val();'/>");
+				//label = $("<label for='"+ansQ2[i].option+"'>"+ansQ2[i].option+"</label>");
+				//td2.append(input,label);
+			//}
+			input1 = $("<input type='date' id='start' name='Q2'/>");
+			input2 = $("<input type='date' id='end' name='Q2'onclick='getQ2Val();'/>");
+			td2.append(input1,input2);
 			tr2.append(td2);
 			$("#q4_options").before(tr1, tr2);
 		}
@@ -247,7 +250,9 @@
 			$("#q4_options").before(tr2);
 		}
 		// #Q2에 값 저장
-		$('#Q2').val($("input:radio[name='Q2']:checked").val());
+		var start = $("#start").val();
+		var end = $("#end").val();
+		$('#Q2').val(start+","+end);
 		
 	};
 	
