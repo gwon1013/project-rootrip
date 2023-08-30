@@ -71,32 +71,33 @@ public class RecommendLocDAO {
 			System.out.println(acts.get(0));
 			if ( acts.get(0) != null ) { // 액티비티를 선택했다면
 				try {
-					// 액티비티 중 첫번째 인덱스를 할 수 있는 지역들 불러오기
-					locs = ss.getMapper(RecommendLocMapper.class).getLocByCate(acts.get(0));
-					// 지역마다 할 수 있는 카테고리 리스트(4xx 제외) 조회
-					for (BigDecimal l : locs) {
-						cats = ss.getMapper(RecommendLocMapper.class).getCateByLoc(l);
-						// others와 cats를 비교하여 중복 값 찾기(갯수찾기)
-						cats.retainAll(others);
-						// 맵에 넣기
-						map.put(l, cats.size());
+					for (int i = 0; i < acts.size(); i++) {
+						// 액티비티 중 첫번째 인덱스를 할 수 있는 지역들 불러오기
+						locs = ss.getMapper(RecommendLocMapper.class).getLocByCate(acts.get(i));
+						// 지역마다 할 수 있는 카테고리 리스트(4xx 제외) 조회
+						for (BigDecimal l : locs) {
+							cats = ss.getMapper(RecommendLocMapper.class).getCateByLoc(l);
+							// others와 cats를 비교하여 중복 값 찾기(갯수찾기)
+							cats.retainAll(others);
+							// 맵에 넣기
+							map.put(l, cats.size());
+							}
+						keySet = new ArrayList<BigDecimal>(map.keySet());
+						keySet.sort(new Comparator<BigDecimal>() {
+							@Override
+							public int compare(BigDecimal o1, BigDecimal o2) {
+								return map.get(o2).compareTo(map.get(o1));
+							}
+						});
+						List<String> locNames = new ArrayList<String>();
+						for (BigDecimal key : keySet) {
+							System.out.print("Key : " + key);
+							System.out.println(", Val : " + map.get(key));
+							locNames.add(ss.getMapper(RecommendLocMapper.class).getLocName(key));
 						}
-					keySet = new ArrayList<BigDecimal>(map.keySet());
-					keySet.sort(new Comparator<BigDecimal>() {
-						@Override
-						public int compare(BigDecimal o1, BigDecimal o2) {
-							return map.get(o2).compareTo(map.get(o1));
-						}
-					});
-					List<String> locNames = new ArrayList<String>();
-					for (BigDecimal key : keySet) {
-						System.out.print("Key : " + key);
-						System.out.println(", Val : " + map.get(key));
-						locNames.add(ss.getMapper(RecommendLocMapper.class).getLocName(key));
+						req.setAttribute("resultLocName"+i, locNames);
 					}
-					req.setAttribute("result", keySet);
-					req.setAttribute("resultLocName", locNames);
-					
+					req.setAttribute("acts", acts);
 					
 					
 				} catch (Exception e) {

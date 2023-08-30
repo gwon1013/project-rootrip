@@ -197,6 +197,25 @@
 		$("#next_btn").on('click',function(){
 			$("#submit_btn").click();
 		});
+		
+		
+		// 현재 날짜 설정
+		let currentDate = new Date();
+		// 현재 날짜 String으로
+		let minStr = currentDate.toISOString().split('T')[0];
+		// 최소 날짜 설정
+		$(document).on("click","#sDate",function(){
+			$("#sDate").attr("min",minStr);
+		});
+		$(document).on("click","#eDate",function(){
+			$("#eDate").attr("min",$("#sDate").val());
+		});
+		
+		//sDate 바꿨을 때 eDate 초기화
+		$(document).on("change","#sDate",function(){
+			$("#eDate").val(null);
+		});
+		
 	});
 		
 	// Q1 선택했을 때
@@ -217,8 +236,8 @@
 				//label = $("<label for='"+ansQ2[i].option+"'>"+ansQ2[i].option+"</label>");
 				//td2.append(input,label);
 			//}
-			input1 = $("<input type='date' id='start' name='Q2'/>");
-			input2 = $("<input type='date' id='end' name='Q2'onclick='getQ2Val();'/>");
+			input1 = $("<input type='date' id='sDate' name='Q2' />");
+			input2 = $("<input type='date' id='eDate' name='Q2'onchange='getQ2Val();'/>");
 			td2.append(input1,input2);
 			tr2.append(td2);
 			$("#q4_options").before(tr1, tr2);
@@ -229,31 +248,36 @@
 	
 	// Q2 선택했을 때
 	function getQ2Val(){
-		// 만약 #Q2에 값이 0이라면
-		if ($('#Q2').val() == 0) {
-			// Q3 질문 추가하기
-			let td1 = $("<td></td>").text("Q3. 뭐 하고 싶은데?");
-			let tr1 = $("<tr></tr>").append(td1);
-			$("#q4_options").before(tr1);
-			
-			// Q3 선택지 추가하기
-			let td2 = $("<td></td>");
-			let tr2 = $("<tr></tr>");
-			let input = null;
-			let label = null;
-			for (var i = 0; i < ansQ3.length; i++) {
-				input = $("<input type='checkbox' id='"+ansQ3[i].option+"' name='Q3' value='"+ansQ3[i].value+"' onclick='getQ3Val("+ansQ3[i].option+");'/>");
-				label = $("<label for='"+ansQ3[i].option+"'>"+ansQ3[i].option+"</label>");
-				td2.append(input,label);
+		var start = $("#sDate").val();
+		var end = $("#eDate").val();
+		if (start > end) {
+			alert("시작 날짜는 종료 날짜보다 앞서야 합니다!");
+			$("#eDate").focus();
+		} else {
+			// 만약 #Q2에 값이 0이라면
+			if ($('#Q2').val() == 0) {
+				// Q3 질문 추가하기
+				let td1 = $("<td></td>").text("Q3. 뭐 하고 싶은데?");
+				let tr1 = $("<tr></tr>").append(td1);
+				$("#q4_options").before(tr1);
+				
+				// Q3 선택지 추가하기
+				let td2 = $("<td></td>");
+				let tr2 = $("<tr></tr>");
+				let input = null;
+				let label = null;
+				for (var i = 0; i < ansQ3.length; i++) {
+					input = $("<input type='checkbox' id='"+ansQ3[i].option+"' name='Q3' value='"+ansQ3[i].value+"' onclick='getQ3Val("+ansQ3[i].option+");'/>");
+					label = $("<label for='"+ansQ3[i].option+"'>"+ansQ3[i].option+"</label>");
+					td2.append(input,label);
+				}
+				tr2.append(td2);
+				$("#q4_options").before(tr2);
 			}
-			tr2.append(td2);
-			$("#q4_options").before(tr2);
+			// #Q2에 값 저장
+			$('#Q2').val(start+","+end);
+			
 		}
-		// #Q2에 값 저장
-		var start = $("#start").val();
-		var end = $("#end").val();
-		$('#Q2').val(start+","+end);
-		
 	};
 	
 	// Q3 선택했을 때
@@ -360,6 +384,5 @@
 			<td><button id="next_btn" style="display:none">결과확인하기</button></td>
 		</tr>
 	</table>
-
 
 </body>

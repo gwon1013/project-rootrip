@@ -10,16 +10,9 @@
 <body>
 	<h1>추천결과</h1>
 	<table>
-		<c:forEach var="l" items="${result }" end="4">
+		<c:forEach var="ln" items="${resultLocName0}" end="4" varStatus="vs">
 			<tr>
-				<td>${l }</td>
-			</tr>
-		</c:forEach>
-	</table>
-	<table>
-		<c:forEach var="ln" items="${resultLocName }" end="4" varStatus="vs">
-			<tr>
-				<td><a href="#">${vs.count}위 : ${ln }  ${result[vs.index] } </a></td>
+				<td><a href="#">${vs.count}위 : ${ln }</a></td>
 			</tr>
 		</c:forEach>
 	</table>
