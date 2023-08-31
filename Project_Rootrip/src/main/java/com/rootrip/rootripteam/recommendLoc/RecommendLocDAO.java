@@ -16,6 +16,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class RecommendLocDAO {
 	
+	public void name() {
+		
+	}
+	
 	@Autowired
 	private SqlSession ss;
 	
@@ -66,14 +70,19 @@ public class RecommendLocDAO {
 			final Map<BigDecimal, Integer> map = new HashMap<BigDecimal, Integer>();
 			// 정렬 후 리스트
 			List<BigDecimal> keySet;
+			// 지역 이름 순위 리스트
+			List<String> locNames;
+			// 결과 리스트
+			List<List<String>> resultList = new ArrayList<List<String>>();
 			
 			
-			System.out.println(acts.get(0));
-			if ( acts.get(0) != null ) { // 액티비티를 선택했다면
+			if ( acts.size() != 0 ) { // 액티비티를 선택했다면
 				try {
 					for (int i = 0; i < acts.size(); i++) {
+						
 						// 액티비티 중 첫번째 인덱스를 할 수 있는 지역들 불러오기
 						locs = ss.getMapper(RecommendLocMapper.class).getLocByCate(acts.get(i));
+						
 						// 지역마다 할 수 있는 카테고리 리스트(4xx 제외) 조회
 						for (BigDecimal l : locs) {
 							cats = ss.getMapper(RecommendLocMapper.class).getCateByLoc(l);
@@ -82,22 +91,32 @@ public class RecommendLocDAO {
 							// 맵에 넣기
 							map.put(l, cats.size());
 							}
+						
+						// 지역별 카테고리 리스트
 						keySet = new ArrayList<BigDecimal>(map.keySet());
+						
+						// value 에 따라 keyset 내림차순 정렬
 						keySet.sort(new Comparator<BigDecimal>() {
 							@Override
 							public int compare(BigDecimal o1, BigDecimal o2) {
 								return map.get(o2).compareTo(map.get(o1));
 							}
 						});
-						List<String> locNames = new ArrayList<String>();
+						
+						// 지역 이름을 담을 새로운 리스트 생성
+						locNames= new ArrayList<String>();
+						
+						// 카테고리 이름도 가져오기
+						locNames.add(ss.getMapper(RecommendLocMapper.class).getCatName(acts.get(i)));
+						
+						// ketset(지역코드)에 따라 지역 이름 조회 후 locNames에 추가
 						for (BigDecimal key : keySet) {
-							System.out.print("Key : " + key);
-							System.out.println(", Val : " + map.get(key));
 							locNames.add(ss.getMapper(RecommendLocMapper.class).getLocName(key));
 						}
-						req.setAttribute("resultLocName"+i, locNames);
+						resultList.add(locNames);
+						
 					}
-					req.setAttribute("acts", acts);
+					req.setAttribute("resultList", resultList);
 					
 					
 				} catch (Exception e) {
@@ -106,11 +125,46 @@ public class RecommendLocDAO {
 				
 			
 			} else { // 액티비티를 선택하지 않았다면
-				
+				try {
+					locs = ss.getMapper(RecommendLocMapper.class).getAllLoc();
+					// 지역마다 할 수 있는 카테고리 리스트(4xx 제외) 조회
+					for (BigDecimal l : locs) {
+						cats = ss.getMapper(RecommendLocMapper.class).getCateByLoc(l);
+						// others와 cats를 비교하여 중복 값 찾기(갯수찾기)
+						cats.retainAll(others);
+						// 맵에 넣기
+						map.put(l, cats.size());
+					}
+					// 지역별 카테고리 리스트
+					keySet = new ArrayList<BigDecimal>(map.keySet());
+					
+					// value 에 따라 keyset 내림차순 정렬
+					keySet.sort(new Comparator<BigDecimal>() {
+						@Override
+						public int compare(BigDecimal o1, BigDecimal o2) {
+							return map.get(o2).compareTo(map.get(o1));
+						}
+					});
+					
+					// 지역 이름을 담을 새로운 리스트 생성
+					locNames= new ArrayList<String>();
+					
+//					int mapVal = map.get(keySet.get(0));
+//					System.out.println(mapVal);
+					int count = 0;
+					// ketset(지역코드)에 따라 지역 이름 조회 후 locNames에 추가
+					System.out.println("==========================");
+					for (BigDecimal key : keySet) {
+						System.out.println(key + ":" + map.get(key));
+						locNames.add(ss.getMapper(RecommendLocMapper.class).getLocName(key));
+					}
+					
+					req.setAttribute("resultListNoActs", locNames);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-			
-			
-			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
