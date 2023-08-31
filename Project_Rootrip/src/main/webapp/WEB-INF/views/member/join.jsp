@@ -5,11 +5,26 @@
 <head>
 <meta charset="UTF-8">
 <title>join.jsp</title>
+<style>
+	#Jointable img{
+		width: 70px;
+	}
+	.JoinBox {
+		background-color: white;
+        border: 2px solid gray;
+        width: 630px;
+        margin: 20px auto;
+        padding: 20px;	
+        text-align: center;
+        border-radius: 5px;
+        height: 500px;
+	}
+</style>
 </head>
 <body>
 	<h2>회원가입</h2>
 	<form action="member.join" method="post" enctype="multipart/form-data" name="joinForm" onsubmit="return checkJoin();">
-		<table>
+		<table id="Jointable" class="JoinBox">
 			<tr>
 				<td>E-mail</td>
 				<td align="center"><input id="join_id" name="u_id" placeholder="아이디" autofocus="autofocus" autocomplete="off">@
@@ -18,7 +33,7 @@
 						<option>gmail.com</option>
 						<option>naver.com</option>
 						<option>kakao.com</option>
-						<option>nate.com</option>
+						<option>nate.com</option> 
 						<option>hanmail.net</option>
 						<option>직접입력</option>
 					</select>
