@@ -6,19 +6,24 @@
 <head>
 <meta charset="UTF-8">
 <title>afterlogin.jsp</title>
+<style>
+	.profile{
+		width: 70px;
+	}
+</style>
 </head>
 <body>
 	<table>
 	<tr>
-	<td>
-		<c:choose>
-			<c:when test="${sessionScope.loginMember.u_profile != null }">
-				<img class="profile" src="resources/img/${sessionScope.loginMember.u_profile}">
-			</c:when>
-			<c:when test="${sessionScope.loginMember.u_profile == null }">
-				<img class="profile" src="resources/img/profile.png">
-			</c:when>
-		</c:choose>
+		<td>
+			<c:choose>
+				<c:when test="${sessionScope.loginMember.u_profile != null }">
+					<img class="profile" src="resources/img/${sessionScope.loginMember.u_profile}">
+				</c:when>
+				<c:when test="${sessionScope.loginMember.u_profile == null }">
+					<img class="profile" src="resources/img/profile.png">
+				</c:when>
+			</c:choose>
 		</td>
 	<td><a href="info">회원정보</a></td>
 	</tr>
