@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>question.jsp</title>
+<link rel="stylesheet" href="resources/css/startPage.css" type="text/css" />
+<link rel="stylesheet" href="resources/css/questionmenu.css" />
 <script type="text/javascript">
 		// Q1 선택지 리스트
 		let ansQ1 =  [
@@ -363,7 +365,7 @@
 	<!-- 질문 나오는 table -->
 	<table id="visibleTb" border="1">
 		<tr>
-			<td>내가 여행지를 추천해줄게</td>
+			<td id="recommendplace">내가 여행지를 추천해줄게</td>
 		</tr>
 		<tr>
 			<td>몇가지 질문에 대답해주면 돼</td>
