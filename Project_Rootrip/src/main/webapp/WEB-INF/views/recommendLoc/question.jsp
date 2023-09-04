@@ -368,7 +368,7 @@
 			<td id="recommendplace">내가 여행지를 추천해줄게</td>
 		</tr>
 		<tr>
-			<td>몇가지 질문에 대답해주면 돼</td>
+			<td id="qq">몇가지 질문에 대답해주면 돼</td>
 		</tr>
 		<tr id="q4_options">
 			<td>

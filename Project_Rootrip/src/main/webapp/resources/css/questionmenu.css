@@ -46,15 +46,19 @@
 	margin-right: auto;
     border-color: transparent;
     border-radius: 10px;
-	
+	padding : 10px;
 }
 table{
 	margin-left: auto;
 	margin-right: auto;
 	border-radius: 10px;
-	
 }
 
+tr{
+	padding-bottom: 10px;
+    display: block;
+
+}	
 #recommendplace{
 	flex: 1;
     position: relative;
@@ -62,8 +66,7 @@ table{
     max-width: 344px;
     font-size: 25px;
     letter-spacing: -1.88px;
-    padding-bottom: 10px;
-    border-bottom: solid 1px rgba(255, 255, 255, .4);
+    padding-bottom: 15px;
 }
 
 #start_btn{
@@ -108,7 +111,56 @@ table{
   transition:800ms ease all;
 }
 
-
 #next_btn{
-	border: none;
+		border: none;
+	background:transparent;
+  color:black;
+  border:none;
+  position:relative;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  border-radius: 7px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
 }
+
+#next_btn:hover{
+  background:transparent;
+  color:#0000FF;
+}
+#next_btn:before,button:after{
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #0000FF;
+  transition:400ms ease all;
+}
+#next_btn:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+#next_btn:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+
+#qq{
+	margin-bottom: 10px;
+}
+
+#resultTB{
+	border : solid 1px none;
+	border-radius: 10px;
+}
+  
