@@ -7,13 +7,32 @@
 <meta charset="UTF-8">
 <title>afterlogin.jsp</title>
 <style>
-	.profile{
+	.profile {
 		width: 70px;
+		display: inline-block;
+		border-radius: 70%;
+		margin-left: 100px;
+		
 	}
+	.options {         
+            display: inline-block;
+            vertical-align: middle;
+            cursor: pointer; 
+            margin-left: 20px;
+			margin-top: 10px;
+        }
+     .links {
+            display: none; 
+            position: absolute;
+            left: 130px;
+            top: 80px;
+            background-color: #00A2E8; 
+            padding: 10px;           
+        }      
 </style>
 </head>
 <body>
-	<table>
+	<table style="float: left;">
 	<tr>
 		<td>
 			<c:choose>
@@ -25,8 +44,28 @@
 				</c:when>
 			</c:choose>
 		</td>
-	<td><a href="info">회원정보</a></td>
 	</tr>
 	</table>
+	<div class="options" id="optionsIcon">
+		<img src="resources/img/옵션.png" style="width: 25px;">
+	</div>
+	<div style="float: left;" class="links" id="linksDiv">
+		<a href="info">회원정보</a><p>
+		<a href="logout">로그아웃</a>
+	</div>
+	 <script>
+        var linksDiv = document.getElementById("linksDiv");
+        var optionsIcon = document.getElementById("optionsIcon");
+        var isOpen = false;
+
+        optionsIcon.addEventListener("click", function() {
+            if (isOpen) {
+                linksDiv.style.display = "none"; 
+            } else {
+                linksDiv.style.display = "block";
+            }
+            isOpen = !isOpen;
+        });
+    </script>
 </body>
 </html>
