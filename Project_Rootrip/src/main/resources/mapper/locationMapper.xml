@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jinu.test.Location.LocationMapper">
+<mapper namespace="com.rootrip.rootripteam.location.LocationMapper">
 	<insert id="insertLocation" parameterType="com.rootrip.rootripteam.location.Location">
 		insert into LOCATION values (#{l_no}, #{l_name}, #{l_lat}, #{l_lon})
 	</insert>
+	<select id="getAllLocation" resultType="com.rootrip.rootripteam.location.Location">
+		select * from LOCATION
+	</select>
+	<select id="getLocation" parameterType="String" resultType="com.rootrip.rootripteam.location.Location">
+		select * from LOCATION where l_no = #{l_no}
+	</select>
+	<update id="editWithPhoto">
+		update LOCATION set l_name = #{l_name}, l_photo = #{l_photo}, l_lat = #{l_lat}, l_lon = #{l_lon}
+		where l_no=#{l_no}
+	</update>
+	<update id="editWithoutPhoto">
+		update LOCATION set l_name = #{l_name}, l_lat = #{l_lat}, l_lon = #{l_lon}
+		where l_no=#{l_no}
+	</update>
 </mapper>

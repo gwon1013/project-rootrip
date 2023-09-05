@@ -22,9 +22,13 @@ public class MemberDAO {
 
 	public boolean loginCheck(HttpServletRequest req) {
 		Member m = (Member) req.getSession().getAttribute("loginMember");
-		if (m != null) {
+		if (m != null && m.getU_type().intValue() == 1) {
 			req.setAttribute("loginPage", "member/afterlogin.jsp");
 			return true;
+		}
+		else if (m != null) {
+			req.setAttribute("loginPage", "member/afterlogin.jsp");
+			return false;
 		} else {
 			req.setAttribute("loginPage", "member/beforlogin.jsp");
 			return false;

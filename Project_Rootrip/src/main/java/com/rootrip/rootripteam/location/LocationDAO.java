@@ -1,11 +1,18 @@
 package com.rootrip.rootripteam.location;
 
 import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.rootrip.rootripteam.member.MemberMapper;
 
 @Service
 public class LocationDAO {
@@ -34,5 +41,39 @@ public class LocationDAO {
 		}
 
 		return result;
+	}
+	public int editLocation(Location l, HttpServletRequest req) {
+		int result = 0;
+		String path = req.getSession().getServletContext().getRealPath("resources/img");
+
+		MultipartRequest mr;
+		try {
+			mr = new MultipartRequest(req, path, 10485760, "utf-8", new DefaultFileRenamePolicy());
+			l.setL_name(mr.getParameter("l_name"));
+			l.setL_no(new BigDecimal(mr.getParameter("l_no")));
+			l.setL_lat(Double.parseDouble(mr.getParameter("l_lat")));
+			l.setL_lon(Double.parseDouble(mr.getParameter("l_lon")));
+
+			String photo = mr.getFilesystemName("l_photo");
+			if (photo != null) {
+				String photo_kor = URLEncoder.encode(photo, "utf-8").replace('+', ' ');
+				l.setL_photo(photo_kor);
+				result = ss.getMapper(LocationMapper.class).editWithPhoto(l);
+			} else {
+				result = ss.getMapper(LocationMapper.class).editWithoutPhoto(l);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public List<Location> getLocation(String l_no){
+		return ss.getMapper(LocationMapper.class).getLocation(l_no);
+	}
+	
+	public List<Location> getAllLocation(){
+		return ss.getMapper(LocationMapper.class).getAllLocation();
 	}
 }

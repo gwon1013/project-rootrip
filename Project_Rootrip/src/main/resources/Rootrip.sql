@@ -20,7 +20,7 @@ COMMENT ON COLUMN USERS.u_type IS '사용자의 종류
 
 CREATE TABLE CATEGORY (
 	c_no	number(3)		NOT NULL,
-	c_name	VARCHAR(255)		NOT NULL
+	c_name	varchar2(20char)		NOT NULL
 );
 
 COMMENT ON COLUMN CATEGORY.c_no IS '장소의 분류 별 
@@ -31,14 +31,15 @@ COMMENT ON COLUMN CATEGORY.c_name IS '해당 번호의 카테고리 이름';
 CREATE TABLE SPOT (
 	s_no	number(10)		NOT NULL,
 	s_photo	varchar2(200 char)		NULL,
-	s_name	varchar2(20 char)		NOT NULL,
-	s_addr	varchar2(20 char)		NOT NULL,
+	s_name	varchar2(50 char)		NOT NULL,
+	s_addr_jibun	varchar2(50 char)		NULL,
+	s_addr_road	varchar2(50 char)		NULL,
 	s_tel	varchar2(14char)		NULL,
-	s_lat	number(8, 2)		NOT NULL,
-	s_lon	number(9, 3)		NOT NULL,
-	s_comment	varchar2(100 char)		NULL,
+	s_lat	number(9, 7)		NOT NULL,
+	s_lon	number(10, 7)		NOT NULL,
+	s_comment	varchar2(500 char)		NULL,
 	c_no	number(3)		NOT NULL,
-	l_no	number(3)		NOT NULL
+	l_no	number(4)		NOT NULL
 );
 
 COMMENT ON COLUMN SPOT.s_no IS '각 장소별 고유 번호';
@@ -47,7 +48,9 @@ COMMENT ON COLUMN SPOT.s_photo IS '장소에 대한 사진';
 
 COMMENT ON COLUMN SPOT.s_name IS '장소의 이름';
 
-COMMENT ON COLUMN SPOT.s_addr IS '장소의 주소';
+COMMENT ON COLUMN SPOT.s_addr_jibun IS '장소의  지번 주소';
+
+COMMENT ON COLUMN SPOT.s_addr_road IS '장소의 도로명 주소';
 
 COMMENT ON COLUMN SPOT.s_tel IS '장소의 전화번호';
 
@@ -63,10 +66,22 @@ COMMENT ON COLUMN SPOT.c_no IS '장소의 분류 별
 COMMENT ON COLUMN SPOT.l_no IS '지역별 고유 번호';
 
 CREATE TABLE LOCATION (
-	l_no	number(3)		NOT NULL
+	l_no	number(4)		NOT NULL,
+	l_name	varchar2(10char)		NOT NULL,
+	l_photo	varchar2(2200char)		NULL,
+	l_lat	number(9, 7)		NOT NULL,
+	l_lon	number(10, 7)		NOT NULL
 );
 
 COMMENT ON COLUMN LOCATION.l_no IS '지역별 고유 번호';
+
+COMMENT ON COLUMN LOCATION.l_name IS '지역의 이름';
+
+COMMENT ON COLUMN LOCATION.l_photo IS '지역에 대한 사진';
+
+COMMENT ON COLUMN LOCATION.l_lat IS '지역의 위도';
+
+COMMENT ON COLUMN LOCATION.l_lon IS '지역의 경도';
 
 CREATE TABLE COURSE (
 	c_no	number(10)		NOT NULL,
@@ -115,12 +130,20 @@ COMMENT ON COLUMN FESTIVAL.f_e_date IS '지역 축제 종료일자';
 
 CREATE TABLE MARKET (
 	s_no	number(10)		NOT NULL,
-	m_sort	number(1)		NOT NULL
+	m_sort	number(1)		NOT NULL,
+	m_day	number(4)		NULL
 );
 
 COMMENT ON COLUMN MARKET.s_no IS '각 장소별 고유 번호';
 
-COMMENT ON COLUMN MARKET.m_sort IS '정기 시장, 상설 시장 구분';
+COMMENT ON COLUMN MARKET.m_sort IS '0 : 상설시장
+1: 정기시장
+2 : 상설 + 정기 시장';
+
+COMMENT ON COLUMN MARKET.m_day IS '시장의 장날
+16
+27
+등의 숫자가 들어감';
 
 CREATE TABLE FOLLOW (
 	from_mail	varchar2(50char)		NOT NULL,
@@ -131,15 +154,15 @@ COMMENT ON COLUMN FOLLOW.from_mail IS '팔로우를 한 사용자 이메일';
 
 COMMENT ON COLUMN FOLLOW.to_mail IS '팔로우 당한 사용자 이메일';
 
-CREATE TABLE CATEGORIES_BY_LOCATION (
+CREATE TABLE CATE_BY_LOC (
 	c_no	number(3)		NOT NULL,
-	l_no	number(3)		NOT NULL
+	l_no	number(4)		NOT NULL
 );
 
-COMMENT ON COLUMN CATEGORIES_BY_LOCATION.c_no IS '장소의 분류 별 
+COMMENT ON COLUMN CATE_BY_LOC.c_no IS '장소의 분류 별 
 고유 번호';
 
-COMMENT ON COLUMN CATEGORIES_BY_LOCATION.l_no IS '지역별 고유 번호';
+COMMENT ON COLUMN CATE_BY_LOC.l_no IS '지역별 고유 번호';
 
 CREATE TABLE TOUR (
 	s_no	number(10)		NOT NULL
@@ -147,11 +170,11 @@ CREATE TABLE TOUR (
 
 COMMENT ON COLUMN TOUR.s_no IS '각 장소별 고유 번호';
 
-CREATE TABLE Wellness (
+CREATE TABLE WELLNESS (
 	s_no	number(10)		NOT NULL
 );
 
-COMMENT ON COLUMN Wellness.s_no IS '각 장소별 고유 번호';
+COMMENT ON COLUMN WELLNESS.s_no IS '각 장소별 고유 번호';
 
 CREATE TABLE RESTAURANT (
 	s_no	number(10)		NOT NULL
@@ -161,15 +184,12 @@ COMMENT ON COLUMN RESTAURANT.s_no IS '각 장소별 고유 번호';
 
 CREATE TABLE ACCOMMODATION (
 	s_no	number(10)		NOT NULL,
-	a_price	number(10)		NULL,
-	a_people	number(3)		NULL
+	a_price	number(10)		NULL
 );
 
 COMMENT ON COLUMN ACCOMMODATION.s_no IS '각 장소별 고유 번호';
 
 COMMENT ON COLUMN ACCOMMODATION.a_price IS '숙소의 최저가';
-
-COMMENT ON COLUMN ACCOMMODATION.a_people IS '숙소의 권장 인원';
 
 CREATE TABLE COURSE_USER (
 	c_no	number(10)		NOT NULL,
@@ -218,7 +238,7 @@ ALTER TABLE TOUR ADD CONSTRAINT PK_TOUR PRIMARY KEY (
 	s_no
 );
 
-ALTER TABLE Wellness ADD CONSTRAINT PK_WELLNESS PRIMARY KEY (
+ALTER TABLE WELLNESS ADD CONSTRAINT PK_WELLNESS PRIMARY KEY (
 	s_no
 );
 
@@ -255,7 +275,7 @@ REFERENCES SPOT (
 	s_no
 );
 
-ALTER TABLE Wellness ADD CONSTRAINT FK_SPOT_TO_Wellness_1 FOREIGN KEY (
+ALTER TABLE WELLNESS ADD CONSTRAINT FK_SPOT_TO_WELLNESS_1 FOREIGN KEY (
 	s_no
 )
 REFERENCES SPOT (
@@ -283,7 +303,3 @@ REFERENCES SPOT (
 	s_no
 );
 
-select * from USERS
-select * from spot;
-
-grant select on spot to gwon13;

@@ -118,6 +118,29 @@ function changeImage(files, profile){
 	}
 }
 
+function changeLocationImage(files, profile){
+	if(files[0]) {
+		if(files[0].type.startsWith("image/")) {
+			var reader = new FileReader()
+			reader.onload = e => {
+				$("#location_preview").attr("src", e.target.result)
+			}
+			reader.readAsDataURL(files[0]);
+			return;
+		}
+		else {
+			alert("지원하지 않는 파일입니다.");
+			document.getElementById("input_photo").value="";
+		}
+    }
+	if(!(profile == null || profile == "")) {
+		$("#location_preview").attr("src", "resources/img/"+profile)
+	}
+	else {
+		$("#location_preview").attr("src", "resources/img/city.png")
+	}
+}
+
 function connectIdCheckEvent() {
 	$("#join_id").on("propertychange change keyup paste input", function() {
 		var u_mail = $(this).val()+'@'+$("#join_domain_input").val();
@@ -168,6 +191,36 @@ function selectDomain(){
 		$("#join_domain_input").val(value);
 	}
 	
+}
+
+function checkEditLocation(){
+	var l_name = document.editForm.l_name;
+	var l_number = document.editForm.l_no;
+	var l_lat = document.editForm.l_lat;
+	var l_lon = document.editForm.l_lon;
+	var l_photo = document.editForm.l_photo;
+	
+	if(isEmpty(l_name)) {
+		l_name.focus();
+		alert("지역 이름이 비어있습니다!");
+		return false;
+	}
+	else if(isEmpty(l_lat) || isEmpty(l_lon)){
+		l_lat.focus();
+		alert("위도/경도가 비어있습니다!");
+		return false;
+	}
+	else if (l_photo.value){
+		if(isNotType(photoInput, "JPG") && isNotType(photoInput, "PNG")
+				&& isNotType(photoInput, "BMP") && isNotType(photoInput, "WEBP")
+				&& isNotType(photoInput, "JPEG") && isNotType(photoInput, "jpg")
+				&& isNotType(photoInput, "png") && isNotType(photoInput, "bmp")
+				&& isNotType(photoInput, "webp")) {
+					alert("호환되지 않는 확장자 파일!");
+					return false;
+				}
+	}
+	return true;
 }
 
 $(function() {
