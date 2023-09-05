@@ -103,7 +103,7 @@ body:before{
   height:60px;
   font-size:1.6em;
   padding:0 2em;
-  cursor:pointer;
+  cursor:pointer;	
   transition:800ms ease all;
   outline:none;
   border-radius: 7px;

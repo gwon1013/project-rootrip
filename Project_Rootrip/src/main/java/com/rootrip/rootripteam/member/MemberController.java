@@ -65,7 +65,18 @@ public class MemberController {
 	public String login(Member m, HttpServletRequest req) {
 		mDAO.login(m, req);
 		mDAO.loginCheck(req);
-		req.setAttribute("contentPage", "start.jsp");
+		Member m2 = (Member) req.getSession().getAttribute("loginMember");
+		if (m2 == null) {
+			req.setAttribute("errorPage", "이메일 혹은 비밀번호를 다시 확인해주세요");
+			req.setAttribute("contentPage", "member/login.jsp");
+			return "index";
+		}
+		if(mDAO.loginCheck(req)) {
+			req.setAttribute("contentPage", "admin.jsp");
+		}
+		else {
+			req.setAttribute("contentPage", "start.jsp");
+		}
 		return "index";
 	}
 
