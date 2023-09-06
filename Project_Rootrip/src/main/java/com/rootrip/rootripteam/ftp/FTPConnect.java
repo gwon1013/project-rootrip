@@ -56,7 +56,7 @@ public class FTPConnect {
 		 * (현재 프로젝트 폴더를 확인하는 코드로는 System.getProperty("user.dir") 입니다.
 		 * 이후 경로를 별도로 적어야 합니다.
 		 */
-		FileOutputStream fo = new FileOutputStream("C:\\Users\\sdedu\\git\\project-rootrip\\Project_Rootrip\\src\\main\\webapp\\resources\\img\\"+imageName);
+		FileOutputStream fo = new FileOutputStream("C:\\Users\\sdedu\\git\\project-rootrip\\Project_Rootrip\\src\\main\\webapp\\resources\\img\\지역사진\\"+imageName);
 		client.retrieveFile("지역사진/"+imageName, fo);
 	}
 

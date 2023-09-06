@@ -118,7 +118,7 @@ function changeImage(files, profile){
 	}
 }
 
-function changeLocationImage(files, profile){
+function changeLocationImage(files, photo){
 	if(files[0]) {
 		if(files[0].type.startsWith("image/")) {
 			var reader = new FileReader()
@@ -133,8 +133,8 @@ function changeLocationImage(files, profile){
 			document.getElementById("input_photo").value="";
 		}
     }
-	if(!(profile == null || profile == "")) {
-		$("#location_preview").attr("src", "resources/img/"+profile)
+	if(!(photo == null || photo == "")) {
+		$("#location_preview").attr("src", "resources/img/지역사진/"+photo)
 	}
 	else {
 		$("#location_preview").attr("src", "resources/img/city.png")
