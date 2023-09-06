@@ -7,7 +7,10 @@
 <title>index.jsp</title>
 <style>
 	body {
-		background-color: white;
+		background-image: url('resources/img/background.png');
+		background-size : cover;
+		background-repeat: no-repeat;
+		
 	}
 	#loginImage {
 		position: absolute;

@@ -363,7 +363,7 @@
 	</form>
 
 	<!-- 질문 나오는 table -->
-	<table id="visibleTb" border="1">
+	<table id="visibleTb">
 		<tr>
 			<td id="recommendplace">내가 여행지를 추천해줄게</td>
 		</tr>
