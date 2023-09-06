@@ -6,14 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-	
-</script>
+<link rel="stylesheet" href="resources/css/startPage.css" type="text/css" />
+<link rel="stylesheet" href="resources/css/questionmenu.css" />
 </head>
 <body>
-	<h1>추천결과</h1>
+	<h1 align="center">추천결과</h1>
 	<form>
-		<table>
+		<table id="resultTB">
 			<c:forEach var="rl" items="${resultList }" varStatus="rvs">
 				<tr>
 					<td>${resultList[rvs.index][0] }하기 좋은 장소</td>
