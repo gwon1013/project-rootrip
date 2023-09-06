@@ -1,6 +1,7 @@
 package com.rootrip.rootripteam.recommendLoc;
 
 import java.math.BigDecimal;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -13,20 +14,24 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rootrip.rootripteam.location.LocationMapper;
+
 @Service
 public class RecommendLocDAO {
 	
-	public void name() {
-		
-	}
+	
 	
 	@Autowired
 	private SqlSession ss;
 	
+	
 	public void getResult(HttpServletRequest req) {
 		try {
 			// 파라미터값 가져오기
+			String Q2 = req.getParameter("Q2");
+			req.setAttribute("when", Q2);
 			String Q4 = req.getParameter("Q4");
+			req.setAttribute("acts", Q4);
 			
 			// Q4 , 기준으로 자르기
 			String arrQ4[] = Q4.split(",");
@@ -58,9 +63,8 @@ public class RecommendLocDAO {
 			}
 			
 			
-			// 4xx 할 수 있는 지역 찾기
 			
-			// 빈 액티비티 리스트 생성
+			// 빈 지역 리스트 생성
 			List<BigDecimal> locs = new ArrayList<BigDecimal>();
 			
 			// 빈 카테고리 리스트
@@ -70,8 +74,17 @@ public class RecommendLocDAO {
 			final Map<BigDecimal, Integer> map = new HashMap<BigDecimal, Integer>();
 			// 정렬 후 리스트
 			List<BigDecimal> keySet;
-			// 지역 이름 순위 리스트
+			// 지역 이름 리스트
 			List<String> locNames;
+			
+			// 사진 리스트
+			List<String> photos;
+			
+			// 결과 리스트(l_photo)
+			List<List<String>> resultPhotoList = new ArrayList<List<String>>();
+			
+			// 결과 리스트(l_no)
+			List<List<BigDecimal>> resultNumList = new ArrayList<List<BigDecimal>>();
 			// 결과 리스트
 			List<List<String>> resultList = new ArrayList<List<String>>();
 			
@@ -105,18 +118,25 @@ public class RecommendLocDAO {
 						
 						// 지역 이름을 담을 새로운 리스트 생성
 						locNames= new ArrayList<String>();
-						
+						photos = new ArrayList<String>();
 						// 카테고리 이름도 가져오기
 						locNames.add(ss.getMapper(RecommendLocMapper.class).getCatName(acts.get(i)));
-						
+						photos.add("index0");
 						// ketset(지역코드)에 따라 지역 이름 조회 후 locNames에 추가
 						for (BigDecimal key : keySet) {
 							locNames.add(ss.getMapper(RecommendLocMapper.class).getLocName(key));
+							photos.add(URLDecoder.decode(ss.getMapper(LocationMapper.class).getLocationImage(key.toString()),"UTF-8"));
 						}
+						// keySet 맨 앞에 액티비티 코드 추가
+						keySet.add(0, acts.get(i));
+						resultNumList.add(keySet);
 						resultList.add(locNames);
+						resultPhotoList.add(photos);
 						
 					}
+					req.setAttribute("resultNumList", resultNumList);
 					req.setAttribute("resultList", resultList);
+					req.setAttribute("resultPhotoList", resultPhotoList);
 					
 					
 				} catch (Exception e) {
@@ -148,7 +168,7 @@ public class RecommendLocDAO {
 					
 					// 지역 이름을 담을 새로운 리스트 생성
 					locNames= new ArrayList<String>();
-					
+					photos = new ArrayList<String>();
 //					int mapVal = map.get(keySet.get(0));
 //					System.out.println(mapVal);
 //					int count = 0;
@@ -156,10 +176,11 @@ public class RecommendLocDAO {
 					for (BigDecimal key : keySet) {
 //						System.out.println(key + ":" + map.get(key));
 						locNames.add(ss.getMapper(RecommendLocMapper.class).getLocName(key));
+						photos.add(URLDecoder.decode(ss.getMapper(LocationMapper.class).getLocationImage(key.toString()),"UTF-8"));
 					}
-					
 					req.setAttribute("resultListNoActs", locNames);
-					
+					req.setAttribute("resultNumListNoActs", keySet);
+					req.setAttribute("resultPhotoListNoActs", photos);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
