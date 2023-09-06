@@ -14,6 +14,8 @@ import com.rootrip.rootripteam.member.MemberDAO;
 public class AdminController {
 	@Autowired
 	private MemberDAO mDAO;
+	@Autowired
+	private LocationDAO lDAO;
 
 	@RequestMapping(value = "admin.location", method = RequestMethod.GET)
 	public String manageLocation(HttpServletRequest req) {
@@ -29,6 +31,8 @@ public class AdminController {
 	@RequestMapping(value = "admin.location.edit", method = RequestMethod.GET)
 	public String editLocation(HttpServletRequest req) {
 		if(mDAO.loginCheck(req)) {
+			String l_no = req.getParameter("l_no");
+			lDAO.getLocationImage(l_no);
 			req.setAttribute("contentPage", "admin/editLocation.jsp");
 		}
 		else {

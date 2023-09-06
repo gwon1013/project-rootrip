@@ -1,17 +1,22 @@
 package com.rootrip.rootripteam.location;
 
+import java.io.File;
 import java.math.BigDecimal;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.net.ftp.FTPClient;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.oreilly.servlet.multipart.FileRenamePolicy;
+import com.rootrip.rootripteam.ftp.FTPConnect;
 import com.rootrip.rootripteam.member.MemberMapper;
 
 @Service
@@ -45,14 +50,18 @@ public class LocationDAO {
 	public int editLocation(Location l, HttpServletRequest req) {
 		int result = 0;
 		String path = req.getSession().getServletContext().getRealPath("resources/img");
-
 		MultipartRequest mr;
 		try {
-			mr = new MultipartRequest(req, path, 10485760, "utf-8", new DefaultFileRenamePolicy());
+			mr = new MultipartRequest(req, path, 10485760, "utf-8");
 			l.setL_name(mr.getParameter("l_name"));
 			l.setL_no(new BigDecimal(mr.getParameter("l_no")));
 			l.setL_lat(Double.parseDouble(mr.getParameter("l_lat")));
 			l.setL_lon(Double.parseDouble(mr.getParameter("l_lon")));
+			
+			File file = mr.getFile("l_photo");
+
+			FTPConnect.connect();
+			FTPConnect.upload(file);
 
 			String photo = mr.getFilesystemName("l_photo");
 			if (photo != null) {
@@ -67,6 +76,18 @@ public class LocationDAO {
 		}
 		
 		return result;
+	}
+	
+	public void getLocationImage(String l_no) {
+		String imageName = ss.getMapper(LocationMapper.class).getLocationImage(l_no);
+		try {
+			FTPConnect.connect();
+			String imageName_kor = URLDecoder.decode(imageName, "UTF-8");
+			FTPConnect.download(imageName_kor);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public List<Location> getLocation(String l_no){
