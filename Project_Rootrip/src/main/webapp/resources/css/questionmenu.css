@@ -1,0 +1,166 @@
+@charset "UTF-8";
+@charset "UTF-8";
+
+@font-face { /* 애플산돌고딕 폰트 적용 */
+  font-family: "SDGothic";
+  src: url("/resources/img/영덕대게체.ttf") format("truetype");
+  font-weight: normal;
+} /* 이후 "SDGothic"으로 폰트 적용 가능 */
+
+
+
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap')
+	;
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap')
+	;
+
+#Rootrip {
+	font-family: 'Staatliches', cursive;
+}
+
+#Rootrip {
+	font-family: 'Montserrat', sans-serif;
+}
+
+#Rootrip {
+	font-family: 'Staatliches', cursive;
+	font-size: 3em;
+	text-align: center;
+	color: #F1C164;
+	text-shadow: 5px 5px #2D63A7;
+	margin: 0;
+	border: none;
+}
+
+#visibleTb{
+	border-collapse: collapse;
+  width: 500px;
+  margin: 1rem auto;
+  border: none;
+  background-color: white;
+  margin-left: auto;
+	margin-right: auto;
+    border-color: transparent;
+    border-radius: 10px;
+	padding : 10px;
+}
+table{
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 10px;
+}
+
+tr{
+	padding-bottom: 10px;
+    display: block;
+
+}	
+#recommendplace{
+	flex: 1;
+    position: relative;
+    min-width: 260px;
+    max-width: 344px;
+    font-size: 25px;
+    letter-spacing: -1.88px;
+    padding-bottom: 15px;
+}
+
+#start_btn{
+	background:transparent;
+  color:black;
+  border:none;
+  position:relative;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  border-radius: 7px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+}
+
+#start_btn:hover{
+  background:transparent;
+  color:#0000FF;
+}
+#start_btn:before,button:after{
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #0000FF;
+  transition:400ms ease all;
+}
+#start_btn:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+#start_btn:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+#next_btn{
+		border: none;
+	background:transparent;
+  color:black;
+  border:none;
+  position:relative;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  border-radius: 7px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+}
+
+#next_btn:hover{
+  background:transparent;
+  color:#0000FF;
+}
+#next_btn:before,button:after{
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #0000FF;
+  transition:400ms ease all;
+}
+#next_btn:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+#next_btn:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+
+#qq{
+	margin-bottom: 10px;
+}
+
+#resultTB{
+	border : solid 1px none;
+	border-radius: 10px;
+}
+  
