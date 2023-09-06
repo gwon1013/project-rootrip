@@ -16,4 +16,7 @@
 	<select id="getAllLoc" resultType="BigDecimal">
 		select l_no from LOCATION WHERE l_no NOT IN (900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700)
 	</select>
+	<select id="getLocNum" parameterType="String" resultType="BigDecimal">
+		select l_no from LOCATION where l_name = #{l_name}
+	</select>
 </mapper>

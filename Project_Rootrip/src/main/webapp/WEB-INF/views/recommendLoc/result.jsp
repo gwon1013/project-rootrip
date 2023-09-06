@@ -18,13 +18,13 @@
 			</tr>
 			<c:forEach var="ln" items="${rl }" begin="1" end="5" varStatus="vs">
 				<tr>
-					<td><a href="#">${vs.count}위 : ${ln }</a></td>
+					<td>${vs.count}위 :<a href="recommendLoc.map.go?l_no=${resultNumList[rvs.index][vs.index] }">${ln }<img style="width: 300px; max-height: 100px;" src="resources/img/지역사진/${resultPhotoList[rvs.index][vs.index] }"></a></td>
 				</tr>
 			</c:forEach>
 		</c:forEach>
 		<c:forEach var="rlna" items="${resultListNoActs }" begin="0" end="9" varStatus="navs">
 			<tr>
-				<td><a href="#">${navs.count}위 : ${rlna }</a></td>
+				<td>${navs.count}위 :<a href="recommendLoc.map.go?l_no=${resultNumListNoActs[navs.index] }">${rlna }<img style="width: 300px; max-height: 100px;" src="resources/img/지역사진/${resultPhotoListNoActs[navs.index] }"></a></td>
 			</tr>
 		</c:forEach>
 	</table>
