@@ -5,19 +5,12 @@ import java.math.BigDecimal;
 public class Location {
 	private BigDecimal l_no;
 	private String l_name;
+	private String l_photo;
 	private double l_lat;
 	private double l_lon;
 
 	public Location() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public Location(BigDecimal l_no, String l_name, double l_lat, double l_lon) {
-		super();
-		this.l_no = l_no;
-		this.l_name = l_name;
-		this.l_lat = l_lat;
-		this.l_lon = l_lon;
 	}
 
 	public BigDecimal getL_no() {
@@ -36,6 +29,14 @@ public class Location {
 		this.l_name = l_name;
 	}
 
+	public String getL_photo() {
+		return l_photo;
+	}
+
+	public void setL_photo(String l_photo) {
+		this.l_photo = l_photo;
+	}
+
 	public double getL_lat() {
 		return l_lat;
 	}
@@ -51,4 +52,14 @@ public class Location {
 	public void setL_lon(double l_lon) {
 		this.l_lon = l_lon;
 	}
+
+	public Location(BigDecimal l_no, String l_name, String l_photo, double l_lat, double l_lon) {
+		super();
+		this.l_no = l_no;
+		this.l_name = l_name;
+		this.l_photo = l_photo;
+		this.l_lat = l_lat;
+		this.l_lon = l_lon;
+	}
+
 }

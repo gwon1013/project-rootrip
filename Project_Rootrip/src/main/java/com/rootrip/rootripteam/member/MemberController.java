@@ -64,8 +64,12 @@ public class MemberController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(Member m, HttpServletRequest req) {
 		mDAO.login(m, req);
-		mDAO.loginCheck(req);
-		req.setAttribute("contentPage", "start.jsp");
+		if(mDAO.loginCheck(req)) {
+			req.setAttribute("contentPage", "admin.jsp");
+		}
+		else {
+			req.setAttribute("contentPage", "start.jsp");
+		}
 		return "index";
 	}
 

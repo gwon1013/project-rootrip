@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jinu.test.Spot.SpotMapper">
+<mapper namespace="com.rootrip.rootripteam.Spot.SpotMapper">
 	<insert id="insertMarket" parameterType="com.rootrip.rootripteam.spot.Market">
 		insert into SPOT values(spot_seq.nextval, #{s_photo, jdbcType = VARCHAR}, #{s_name}, #{s_addr_jibun, jdbcType = VARCHAR}, #{s_addr_road, jdbcType = VARCHAR}, #{s_tel, jdbcType = VARCHAR}, #{s_lat}, #{s_lon}, #{s_comment, jdbcType = VARCHAR}, #{c_no}, #{l_no})
 	</insert>

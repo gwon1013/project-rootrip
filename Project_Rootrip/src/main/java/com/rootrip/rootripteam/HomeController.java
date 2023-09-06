@@ -17,8 +17,12 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest req) {
-		mDAO.loginCheck(req);
-		req.setAttribute("contentPage", "start.jsp");
+		if(mDAO.loginCheck(req)) {
+			req.setAttribute("contentPage", "admin.jsp");
+		}
+		else {
+			req.setAttribute("contentPage", "start.jsp");
+		}
 		return "index";
 	}
 

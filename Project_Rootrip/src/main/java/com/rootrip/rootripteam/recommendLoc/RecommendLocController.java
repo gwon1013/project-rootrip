@@ -29,7 +29,7 @@ public class RecommendLocController {
 	
 	// 결과페이지 이동
 	@RequestMapping(value = "/recommendLoc.result.go", method = RequestMethod.GET)
-	public String goResult(HttpServletRequest req, Spot s) {
+	public String goResult(HttpServletRequest req) {
 		mDAO.loginCheck(req);
 		lDAO.getResult(req);
 		req.setAttribute("contentPage", "recommendLoc/result.jsp");

@@ -7,7 +7,7 @@ drop table COURSE_DETAIL cascade constraint purge;
 drop table FESTIVAL cascade constraint purge;
 drop table MARKET cascade constraint purge;
 drop table FOLLOW cascade constraint purge;
-drop table CATEGORIES_BY_LOCATION cascade constraint purge;
+drop table CATE_BY_LOCA cascade constraint purge;
 drop table TOUR cascade constraint purge;
 drop table WELLNESS cascade constraint purge;
 drop table RESTAURANT cascade constraint purge;

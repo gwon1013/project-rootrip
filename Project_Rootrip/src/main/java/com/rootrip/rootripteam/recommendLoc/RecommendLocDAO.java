@@ -151,11 +151,10 @@ public class RecommendLocDAO {
 					
 //					int mapVal = map.get(keySet.get(0));
 //					System.out.println(mapVal);
-					int count = 0;
+//					int count = 0;
 					// ketset(지역코드)에 따라 지역 이름 조회 후 locNames에 추가
-					System.out.println("==========================");
 					for (BigDecimal key : keySet) {
-						System.out.println(key + ":" + map.get(key));
+//						System.out.println(key + ":" + map.get(key));
 						locNames.add(ss.getMapper(RecommendLocMapper.class).getLocName(key));
 					}
 					
