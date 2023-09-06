@@ -5,7 +5,7 @@
 		insert into LOCATION values (#{l_no}, #{l_name}, #{l_lat}, #{l_lon})
 	</insert>
 	<select id="getAllLocation" resultType="com.rootrip.rootripteam.location.Location">
-		select * from LOCATION
+		select * from LOCATION order by l_no asc
 	</select>
 	<select id="getLocation" parameterType="String" resultType="com.rootrip.rootripteam.location.Location">
 		select * from LOCATION where l_no = #{l_no}

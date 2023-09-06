@@ -35,7 +35,7 @@ $(function(){
 </script>
 </head>
 <body>
-	<form action="location.edit" method="post" enctype="multipart/form-data" name="editForm" onsubmit="return checkEditLocation();">
+	<form action="admin.location" method="post" enctype="multipart/form-data" name="editForm" onsubmit="return checkEditLocation();">
 		<table>
 			<tr>
 				<td>지역 이름</td>
