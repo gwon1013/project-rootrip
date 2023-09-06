@@ -193,7 +193,7 @@ function selectDomain(){
 	
 }
 
-function checkEditLocation(){
+function checkLocation(){
 	var l_name = document.editForm.l_name;
 	var l_number = document.editForm.l_no;
 	var l_lat = document.editForm.l_lat;

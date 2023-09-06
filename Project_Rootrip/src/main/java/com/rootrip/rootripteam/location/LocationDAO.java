@@ -8,16 +8,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.net.ftp.FTPClient;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import com.oreilly.servlet.multipart.FileRenamePolicy;
 import com.rootrip.rootripteam.ftp.FTPConnect;
-import com.rootrip.rootripteam.member.MemberMapper;
 
 @Service
 public class LocationDAO {
@@ -47,6 +43,7 @@ public class LocationDAO {
 
 		return result;
 	}
+
 	public int editLocation(Location l, HttpServletRequest req) {
 		int result = 0;
 		String path = req.getSession().getServletContext().getRealPath("resources/img");
@@ -57,7 +54,7 @@ public class LocationDAO {
 			l.setL_no(new BigDecimal(mr.getParameter("l_no")));
 			l.setL_lat(Double.parseDouble(mr.getParameter("l_lat")));
 			l.setL_lon(Double.parseDouble(mr.getParameter("l_lon")));
-			
+
 			File file = mr.getFile("l_photo");
 
 			FTPConnect.connect();
@@ -74,10 +71,41 @@ public class LocationDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
-	
+
+	public int addLocation(Location l, HttpServletRequest req) {
+		int result = 0;
+		String path = req.getSession().getServletContext().getRealPath("resources/img");
+		MultipartRequest mr;
+		try {
+			mr = new MultipartRequest(req, path, 10485760, "utf-8");
+			l.setL_name(mr.getParameter("l_name"));
+			l.setL_no(new BigDecimal(mr.getParameter("l_no")));
+			l.setL_lat(Double.parseDouble(mr.getParameter("l_lat")));
+			l.setL_lon(Double.parseDouble(mr.getParameter("l_lon")));
+
+			File file = mr.getFile("l_photo");
+
+			FTPConnect.connect();
+			FTPConnect.upload(file);
+
+			String photo = mr.getFilesystemName("l_photo");
+			if (photo != null) {
+				String photo_kor = URLEncoder.encode(photo, "utf-8").replace('+', ' ');
+				l.setL_photo(photo_kor);
+
+			}
+			result = ss.getMapper(LocationMapper.class).addLocation(l);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
 	public void getLocationImage(String l_no) {
 		String imageName = ss.getMapper(LocationMapper.class).getLocationImage(l_no);
 		try {
@@ -89,12 +117,32 @@ public class LocationDAO {
 			e.printStackTrace();
 		}
 	}
-	
-	public List<Location> getLocation(String l_no){
+
+	public void removeLocation(String l_no) {
+		ss.getMapper(LocationMapper.class).removeLocation(l_no);
+	}
+
+	public List<Location> getLocationList(int p) {
+		return ss.getMapper(LocationMapper.class).getLocationList(p);
+	}
+
+	public int getAllLocationCount() {
+		return ss.getMapper(LocationMapper.class).getAllLocationCount();
+	}
+
+	public int getLocationCount(String name) {
+		return ss.getMapper(LocationMapper.class).getLocationCount(name);
+	}
+
+	public List<Location> getLocationWithName(String name, int p) {
+		return ss.getMapper(LocationMapper.class).getLocationListWithName(name, p);
+	}
+
+	public List<Location> getLocation(String l_no) {
 		return ss.getMapper(LocationMapper.class).getLocation(l_no);
 	}
-	
-	public List<Location> getAllLocation(){
+
+	public List<Location> getAllLocation() {
 		return ss.getMapper(LocationMapper.class).getAllLocation();
 	}
 }

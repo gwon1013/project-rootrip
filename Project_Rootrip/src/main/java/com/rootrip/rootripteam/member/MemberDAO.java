@@ -25,8 +25,7 @@ public class MemberDAO {
 		if (m != null && m.getU_type().intValue() == 1) {
 			req.setAttribute("loginPage", "member/afterlogin.jsp");
 			return true;
-		}
-		else if (m != null) {
+		} else if (m != null) {
 			req.setAttribute("loginPage", "member/afterlogin.jsp");
 			return false;
 		} else {
@@ -101,7 +100,14 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
 
+	public void kick(String mail) {
+		try {
+			ss.getMapper(MemberMapper.class).kick(mail);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void update(Member m, HttpServletRequest req) {
@@ -138,5 +144,29 @@ public class MemberDAO {
 			sb.append(String.format("%02x", b));
 		}
 		return sb.toString();
+	}
+
+	public List<Member> getUserList(int p) {
+		return ss.getMapper(MemberMapper.class).getUserList(p);
+	}
+
+	public List<Member> getUserListWithMail(String mail, int p) {
+		return ss.getMapper(MemberMapper.class).getUserListWithMail(mail, p);
+	}
+
+	public List<Member> getUserListWithNickname(String nickname, int p) {
+		return ss.getMapper(MemberMapper.class).getUserListWithNickname(nickname, p);
+	}
+
+	public int getAllUserCount() {
+		return ss.getMapper(MemberMapper.class).getAllUserCount();
+	}
+
+	public int getUserCountWithMail(String mail) {
+		return ss.getMapper(MemberMapper.class).getUserCountWithMail(mail);
+	}
+
+	public int getUserCountWithNickname(String nickname) {
+		return ss.getMapper(MemberMapper.class).getUserCountWithNickname(nickname);
 	}
 }

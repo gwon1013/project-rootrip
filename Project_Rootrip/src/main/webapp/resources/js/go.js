@@ -12,11 +12,3 @@ function goDrop(){
 function goQuestion(){
 	location.href="recommendLoc.question.go";
 }
-
-function goManageLocation(){
-	location.href="admin.location";
-}
-
-function goEditLocation(location_number) {
-	location.href="admin.location.edit?l_no="+location_number;
-}

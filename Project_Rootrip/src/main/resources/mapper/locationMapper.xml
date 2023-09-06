@@ -4,11 +4,26 @@
 	<insert id="insertLocation" parameterType="com.rootrip.rootripteam.location.Location">
 		insert into LOCATION values (#{l_no}, #{l_name}, #{l_lat}, #{l_lon})
 	</insert>
+	<insert id="addLocation" parameterType="com.rootrip.rootripteam.location.Location">
+		insert into LOCATION values (#{l_no}, #{l_name}, #{l_photo, jdbcType = VARCHAR}, #{l_lat}, #{l_lon})
+	</insert>
 	<select id="getAllLocation" resultType="com.rootrip.rootripteam.location.Location">
 		select * from LOCATION order by l_no asc
 	</select>
 	<select id="getLocation" parameterType="String" resultType="com.rootrip.rootripteam.location.Location">
 		select * from LOCATION where l_no = #{l_no}
+	</select>
+	<select id="getLocationList" parameterType="int"  resultType="com.rootrip.rootripteam.location.Location">
+		select * from (select rownum as rn, l_no, l_name from(select * from location order by l_no asc))where rn between (#{p} - 1) * 10 + 1 and #{p} * 10
+	</select>
+	<select id="getLocationListWithName" resultType="com.rootrip.rootripteam.location.Location">
+		select * from (select rownum as rn, l_no, l_name from(select * from location where l_name LIKE '%'||#{name}||'%' order by l_no asc))where rn between (#{p} - 1) * 10 + 1 and #{p} * 10
+	</select>
+	<select id="getLocationCount" resultType="int" parameterType="string">
+		select count(l_no) from location where l_name LIKE '%'||#{name}||'%'
+	</select>
+	<select id="getAllLocationCount" resultType="int">
+		select count(l_no) from location
 	</select>
 	<select id="getLocationImage" resultType="String">
 		select l_photo from LOCATION where l_no = #{l_no}
@@ -21,4 +36,7 @@
 		update LOCATION set l_name = #{l_name}, l_lat = #{l_lat}, l_lon = #{l_lon}
 		where l_no=#{l_no}
 	</update>
+	<delete id="removeLocation">
+		delete from LOCATION where l_no = #{l_no}
+	</delete>
 </mapper>

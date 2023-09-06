@@ -10,6 +10,9 @@
 	<delete id="drop" parameterType="com.rootrip.rootripteam.member.Member">
 		delete from users where u_mail=#{u_mail}
 	</delete>
+	<delete id="kick" parameterType="string">
+		delete from users where u_mail=#{mail}
+	</delete>
 	<update id="updateWithProfile">
 		update users set u_pw = #{u_pw}, u_nickname = #{u_nickname}, u_profile = #{u_profile}
 		where u_mail=#{u_mail}
@@ -18,4 +21,22 @@
 		update users set u_pw = #{u_pw}, u_nickname = #{u_nickname}
 		where u_mail=#{u_mail}
 	</update>
+	<select id="getUserList" parameterType="int"  resultType="com.rootrip.rootripteam.member.Member">
+		select * from (select rownum as rn, u_mail, u_nickname, u_type from(select * from users order by u_mail asc))where rn between (#{p} - 1) * 10 + 1 and #{p} * 10
+	</select>
+	<select id="getUserListWithNickname" resultType="com.rootrip.rootripteam.member.Member">
+		select * from (select rownum as rn, u_mail, u_nickname, u_type from(select * from users where u_nickname LIKE '%'||#{nickname}||'%' order by u_nickname asc))where rn between (#{p} - 1) * 10 + 1 and #{p} * 10
+	</select>
+	<select id="getUserListWithMail" resultType="com.rootrip.rootripteam.member.Member">
+		select * from (select rownum as rn, u_mail, u_nickname, u_type from(select * from users where u_mail LIKE '%'||#{mail}||'%' order by u_mail asc))where rn between (#{p} - 1) * 10 + 1 and #{p} * 10
+	</select>
+	<select id="getAllUserCount" resultType="int">
+		select count(u_mail) from users
+	</select>
+	<select id="getUserCountWithNickname" resultType="int" parameterType="string">
+		select count(u_mail) from users where u_nickname LIKE '%'||#{nickname}||'%'
+	</select>
+	<select id="getUserCountWithMail" resultType="int" parameterType="string">
+		select count(u_mail) from users where u_mail LIKE '%'||#{mail}||'%'
+	</select>
 </mapper>

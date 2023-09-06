@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>EditLocation</title>
+<script type="text/javascript" src="resources/js/admin.js"></script>
 <script type="text/javascript">
 $(function(){
 	let searchParams = new URLSearchParams(window.location.search);
@@ -29,6 +30,7 @@ $(function(){
 			document.editForm.l_no.value = location_number;
 			document.editForm.l_lat.value = location_lat;
 			document.editForm.l_lon.value = location_lon;
+			$("#remove_btn").attr('onclick', 'removeLocation("'+l.l_no+'")');
 		})
 	})
 })
@@ -61,7 +63,7 @@ $(function(){
 				<td><input name="l_lon" placeholder="경도"></td>
 			</tr>
 			<tr>
-				<td><button>정보 수정</button></td>
+				<td><button>정보 수정</button><input type="button" id="remove_btn" value="제거"></td>
 			</tr>
 		</table>
 	</form>
