@@ -11,16 +11,17 @@
 		<table>
 			<tr>
 				<td>ID</td>
-				<td><input id="" name="u_mail" placeholder="이메일"></td>
+				<td><input id="u_mail" name="u_mail" placeholder="이메일"></td>
 			</tr>
 			<tr>
 				<td>PW</td>
-				<td><input id="" name="u_pw" placeholder="비밀번호" type="password"></td>
+				<td><input id="u_pw" name="u_pw" placeholder="비밀번호" type="password"></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><button>login</button></td>
+				<td colspan="2" align="center"><button id="loginBtn">login</button></td>
 			</tr>
 		</table>
 	</form>
+	
 </body>
 </html>
