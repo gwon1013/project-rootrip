@@ -19,4 +19,7 @@
 	<select id="getLocNum" parameterType="String" resultType="BigDecimal">
 		select l_no from LOCATION where l_name = #{l_name}
 	</select>
+	<select id="getRandomSpot" parameterType="BigDecimal" resultType="BigDecimal">
+		select s_no from (select s_no from spot where l_no = #{l_no} and c_no = #{c_no} order by dbms_random.value) where rownum=1
+	</select>
 </mapper>

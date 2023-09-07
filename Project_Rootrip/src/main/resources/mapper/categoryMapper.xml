@@ -7,4 +7,7 @@
 	<insert id="insertCategory" parameterType="com.rootrip.rootripteam.category.Category">
 		insert into CATEGORY values (#{c_no}, #{c_name})
 	</insert>
+	<select id="getAllCategory" resultType="com.rootrip.rootripteam.category.Category">
+		select * from CATEGORY
+	</select>
 </mapper>

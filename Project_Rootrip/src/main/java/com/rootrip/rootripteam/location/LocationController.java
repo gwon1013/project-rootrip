@@ -21,19 +21,29 @@ public class LocationController {
 	public @ResponseBody Locations getAllLocation() {
 		return new Locations(lDAO.getAllLocation());
 	}
+
+	@RequestMapping(value = "/location.main", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
+	public @ResponseBody Locations getMainLocation() {
+		return new Locations(lDAO.getMainLocation());
+	}
 	
+	@RequestMapping(value = "/location.sub", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
+	public @ResponseBody Locations getSubLocation(HttpServletRequest req) {
+		String l_no = req.getParameter("l_no");
+		return new Locations(lDAO.getSubLocation(l_no));
+	}
+
 	@RequestMapping(value = "/location", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
 	public @ResponseBody Locations getLocation(String l_no) {
 		return new Locations(lDAO.getLocation(l_no));
 	}
-	
+
 	@RequestMapping(value = "/admin.location", method = RequestMethod.POST)
 	public String editLocation(Location l, HttpServletRequest req) {
-		if(mDAO.loginCheck(req)) {
+		if (mDAO.loginCheck(req)) {
 			lDAO.editLocation(l, req);
 			req.setAttribute("contentPage", "admin/location.jsp");
-		}
-		else {
+		} else {
 			req.setAttribute("contentPage", "start.jsp");
 		}
 		return "index";

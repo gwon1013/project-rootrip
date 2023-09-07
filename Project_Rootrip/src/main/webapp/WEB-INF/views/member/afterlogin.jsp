@@ -8,26 +8,27 @@
 <title>afterlogin.jsp</title>
 <style>
 	.profile {
-		width: 70px;
+		width: 53px;
+		height: 46px;
 		display: inline-block;
-		border-radius: 70%;
-		margin-left: 100px;
-		
+		border-radius: 50%;
+		margin-left: 90px;	
+		margin-top: -1px;	
 	}
 	.options {         
             display: inline-block;
             vertical-align: middle;
             cursor: pointer; 
             margin-left: 20px;
-			margin-top: 10px;
+			margin-top: 16px;			
         }
      .links {
             display: none; 
             position: absolute;
             left: 130px;
-            top: 80px;
-            background-color: #00A2E8; 
-            padding: 10px;           
+            top: 57px;           
+            padding: 1px;         			
+			border-radius: 10px; 
         }      
 </style>
 </head>

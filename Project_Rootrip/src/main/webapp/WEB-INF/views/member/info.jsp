@@ -6,11 +6,26 @@
 <head>
 <meta charset="UTF-8">
 <title>info.jsp</title>
+<style>
+	#Jointable img{
+		width: 70px;
+	}
+	.JoinBox {
+		background-color: white;
+        border: 2px solid gray;
+        width: 630px;
+        margin: 20px auto;
+        padding: 20px;	
+        text-align: center;
+        border-radius: 5px;
+        height: 500px;
+	}
+</style>
 </head>
 <body>
 	<h2>내 정보</h2>
 	<form action="member.update" method="post" enctype="multipart/form-data" name="joinForm" onsubmit="return checkUpdate();">
-		<table>
+		<table id="Jointable" class="JoinBox">
 		<tr>
 				<td>E-mail</td>
 				<td align="center"><input id="join_id" name="u_mail" placeholder="아이디" autofocus="autofocus" readonly="readonly" value="${sessionScope.loginMember.u_mail }"></td>

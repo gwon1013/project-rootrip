@@ -40,7 +40,8 @@ public class RecommendLocController {
 	@RequestMapping(value = "/recommendLoc.map.go", method = RequestMethod.GET)
 	public String goMap(HttpServletRequest req) {
 		mDAO.loginCheck(req);
-		req.setAttribute("contentPage", "maptest/maptest.jsp");
+		lDAO.recommendCourse(req);
+		req.setAttribute("contentPage", "#");
 		return "index";
 	}
 }
