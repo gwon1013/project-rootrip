@@ -48,12 +48,14 @@ body {
 
 
 
+
 .slideshow-container {
 	display: flex;
 	max-width: 700px;
 	overflow: hidden; /* 이미지가 넘치지 않도록 처리 */
 	float: right;
-	margin-right:-200px;
+	margin-right: 10px;
+	margin-top: 60px;
 }
 
 .slide {
@@ -62,20 +64,19 @@ body {
 }
 
 
-@
-keyframes fade {from { opacity:0.4;
-	
+@keyframes fade {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
 }
 
-to {
-	opacity: 1;
-}
 
-}
 .slide img {
 	width: 100%;
 	height: auto;
 }
+
+
+
 
 .button-container {
   	justify-content: start;
@@ -83,7 +84,6 @@ to {
 	float: left;
 	margin-right:auto;
 }
-
 
 body:before {
 	content: '';
@@ -93,11 +93,12 @@ body:before {
 }
 
 .startBtn {
-	background: #F1C063;
+	font-family: "GoryeongStrawberry";
+	background: none;
 	color: #2D63A7;
 	border: none;
 	position: relative;
-	height: 100px;
+	height: 120px;
 	font-size: 1.6em;
 	padding: 0 10em;
 	cursor: pointer;
@@ -105,7 +106,7 @@ body:before {
 	outline: none;
 	border-radius: 7px;
 	float:left;
-	margin-top:60px;
+	margin-top: 90px;
 	margin-right:auto;
 	margin-left:auto;
 }
@@ -135,19 +136,18 @@ section{
 	left: 0;
 	bottom: 0;
 }
-"src/main/webapp/WEB-INF/views/start.jsp"
+
 .startBtn:hover:before, button:hover:after {
 	width: 100%;
 	transition: 800ms ease all;
 }
 
 .button2-container a {
-		text-decoration: none;
-		float:left;
-	margin-top: 300px;
-    margin-left: -500px;
-    padding: 0 8em;
-    background: #F1C063;
+	text-decoration: none;
+	float:left;
+	margin-top: 250px;
+    margin-left: -200px;
+    padding: 0 4em;    
 	color: #2D63A7;
 	position: relative;
 	height: 100px;
