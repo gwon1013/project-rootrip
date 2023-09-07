@@ -22,4 +22,7 @@
 	<select id="getRandomSpot" parameterType="BigDecimal" resultType="BigDecimal">
 		select s_no from (select s_no from spot where l_no = #{l_no} and c_no = #{c_no} order by dbms_random.value) where rownum=1
 	</select>
+	<select id="getCateByLoca" parameterType="BigDecimal" resultType="BigDecimal">
+		select c_no from spot where l_no = #{l}  group by c_no order by c_no
+	</select>
 </mapper>

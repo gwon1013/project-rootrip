@@ -61,7 +61,7 @@ public class RecommendLocDAO {
 			}
 			
 			// 이 지역에서 할 수 있는 카테고리들
-			List<BigDecimal> locCats = new ArrayList<BigDecimal>(ss.getMapper(RecommendLocMapper.class).getCateByLoc(l_no));
+			List<BigDecimal> locCats = new ArrayList<BigDecimal>(ss.getMapper(RecommendLocMapper.class).getCateByLoca(l_no));
 			// 사용자 카테고리와 지역 카테고리 중 중복값
 			locCats.retainAll(userCats);
 			
@@ -83,6 +83,7 @@ public class RecommendLocDAO {
 					others.add(q);
 				}
 			}
+			System.out.println(others);
 			Random r = new Random();
 			
 			// 장소 배열(전체 장소)
@@ -92,7 +93,6 @@ public class RecommendLocDAO {
 
 			// 여행 기간만큼 반복
 			for (long i = 0; i < term ; i++) {
-				int randIndex = 0; 
 				// 장소 배열(날짜 마다 장소)
 				List<BigDecimal> arrSpot = new ArrayList<BigDecimal>();
 				if (i == 0) { // 첫날이라면
@@ -101,14 +101,14 @@ public class RecommendLocDAO {
 						if (tastes.size() != 0) { // 맛집을 선택했는가?
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(101)));
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, acts.get(0)));
-								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, others.get(r.nextInt(others.size()))));
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(101)));
 							allSpot.addAll(arrSpot);
 							arrSpots.add(arrSpot);
 						} else { // 맛집 선택 x
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(104)));
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, acts.get(0)));
-								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, others.get(r.nextInt(others.size()))));
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(104)));
 							allSpot.addAll(arrSpot);
 							arrSpots.add(arrSpot);
@@ -116,15 +116,15 @@ public class RecommendLocDAO {
 					} else { // 액티비티를 선택하지 않았는가?
 						if (tastes.size() != 0) { // 맛집을 선택했는가?
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(101)));
-								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
-								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, others.get(r.nextInt(others.size()))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, others.get(r.nextInt(others.size()))));
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(101)));
 							allSpot.addAll(arrSpot);
 							arrSpots.add(arrSpot);
 						} else { // 맛집 선택 x
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(104)));
-								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
-								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, others.get(r.nextInt(others.size()))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, others.get(r.nextInt(others.size()))));
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(104)));
 							allSpot.addAll(arrSpot);
 							arrSpots.add(arrSpot);
@@ -136,14 +136,14 @@ public class RecommendLocDAO {
 						if (tastes.size() != 0) { // 맛집을 선택했는가?
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(101)));
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, acts.get(0)));
-								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, others.get(r.nextInt(others.size()))));
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(101)));
 							allSpot.addAll(arrSpot);
 							arrSpots.add(arrSpot);
 						} else { // 맛집 선택 x
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(104)));
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, acts.get(0)));
-								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, others.get(r.nextInt(others.size()))));
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(104)));
 							allSpot.addAll(arrSpot);
 							arrSpots.add(arrSpot);
@@ -151,15 +151,15 @@ public class RecommendLocDAO {
 					} else { // 액티비티를 선택하지 않았는가?
 						if (tastes.size() != 0) { // 맛집을 선택했는가?
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(101)));
-								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
-								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, others.get(r.nextInt(others.size()))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, others.get(r.nextInt(others.size()))));
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(101)));
 							allSpot.addAll(arrSpot);
 							arrSpots.add(arrSpot);
 						} else { // 맛집 선택 x
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(104)));
-								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
-								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, others.get(r.nextInt(others.size()))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, others.get(r.nextInt(others.size()))));
 								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(104)));
 							allSpot.addAll(arrSpot);
 							arrSpots.add(arrSpot);
