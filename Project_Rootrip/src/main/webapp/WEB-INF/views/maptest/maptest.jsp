@@ -8,5 +8,7 @@
 </head>
 <body>
 	${param.loc }
+	${param.when }
+	${param.acts }
 </body>
 </html>

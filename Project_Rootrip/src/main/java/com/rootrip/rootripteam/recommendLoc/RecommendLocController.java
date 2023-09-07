@@ -35,4 +35,12 @@ public class RecommendLocController {
 		req.setAttribute("contentPage", "recommendLoc/result.jsp");
 		return "index";
 	}
+	
+	// 지도 페이지로 보내기
+	@RequestMapping(value = "/recommendLoc.map.go", method = RequestMethod.GET)
+	public String goMap(HttpServletRequest req) {
+		mDAO.loginCheck(req);
+		req.setAttribute("contentPage", "maptest/maptest.jsp");
+		return "index";
+	}
 }

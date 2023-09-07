@@ -27,7 +27,7 @@ public class LocationController {
 		return new Locations(lDAO.getLocation(l_no));
 	}
 	
-	@RequestMapping(value = "/location.edit", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin.location", method = RequestMethod.POST)
 	public String editLocation(Location l, HttpServletRequest req) {
 		if(mDAO.loginCheck(req)) {
 			lDAO.editLocation(l, req);

@@ -23,7 +23,7 @@ $(function(){
 			else {
 				location_photo = l.l_photo;
 			}
-			$("img#location_preview").attr('src', 'resources/img/'+location_photo);
+			$("img#location_preview").attr('src', 'resources/img/지역사진/'+location_photo);
 			$("#input_photo").attr('onchange', 'changeLocationImage(this.files, "'+location_photo+'")');
 			document.editForm.l_name.value = location_name;
 			document.editForm.l_no.value = location_number;
@@ -35,7 +35,7 @@ $(function(){
 </script>
 </head>
 <body>
-	<form action="location.edit" method="post" enctype="multipart/form-data" name="editForm" onsubmit="return checkEditLocation();">
+	<form action="admin.location" method="post" enctype="multipart/form-data" name="editForm" onsubmit="return checkEditLocation();">
 		<table>
 			<tr>
 				<td>지역 이름</td>
@@ -52,7 +52,7 @@ $(function(){
 				<td>
 					<img id="location_preview">
 				</td>
-				<td><input id="input_photo" type="file" accept="image/*" name="l_photo"  onchange="changeLocationImage(this.files, '${sessionScope.loginMember.u_profile}');"></td>
+				<td><input id="input_photo" type="file" accept="image/*" name="l_photo"></td>
 			</tr>
 			<tr>
 				<td rowspan="2">위도/경도</td><td><input name="l_lat" placeholder="위도"></td>

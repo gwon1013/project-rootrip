@@ -10,5 +10,5 @@ public interface RecommendLocMapper {
 	public abstract String getLocName(BigDecimal k);
 	public abstract String getCatName(BigDecimal q);
 	public abstract List<BigDecimal> getAllLoc();
-
+	public abstract BigDecimal getLocNum(String nm);
 }
