@@ -16,6 +16,9 @@
 	<select id="getSubLocation" parameterType="String" resultType="com.rootrip.rootripteam.location.Location">
 		select * from LOCATION where l_no between #{l_no} + 1 and #{l_no} + 99 order by l_no
 	</select>
+	<select id="getSubLocationCode" parameterType="String" resultType="BigDecimal">
+		select l_no from LOCATION where l_no between #{l_no} + 1 and #{l_no} + 99 order by l_no
+	</select>
 	<select id="getLocation" parameterType="String" resultType="com.rootrip.rootripteam.location.Location">
 		select * from LOCATION where l_no = #{l_no}
 	</select>

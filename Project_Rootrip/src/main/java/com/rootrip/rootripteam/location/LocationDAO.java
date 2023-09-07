@@ -153,4 +153,8 @@ public class LocationDAO {
 	public List<Location> getSubLocation(String l_no){
 		return ss.getMapper(LocationMapper.class).getSubLocation(l_no);
 	}
+	
+	public List<BigDecimal>getSubLocationCode(String l_no){
+		return ss.getMapper(LocationMapper.class).getSubLocationCode(l_no);
+	}
 }

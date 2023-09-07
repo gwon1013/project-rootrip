@@ -29,5 +29,8 @@ public class HomeController {
 	public String home2(HttpServletRequest req) {
 		return home(req);
 	}
-
+	@RequestMapping(value = "/map.go", method = RequestMethod.GET)
+	public String gomap(HttpServletRequest req) {
+		return "map";
+	}
 }
