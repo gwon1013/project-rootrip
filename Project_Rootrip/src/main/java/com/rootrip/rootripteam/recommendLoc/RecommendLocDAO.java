@@ -2,11 +2,15 @@ package com.rootrip.rootripteam.recommendLoc;
 
 import java.math.BigDecimal;
 import java.net.URLDecoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,6 +28,155 @@ public class RecommendLocDAO {
 	@Autowired
 	private SqlSession ss;
 	
+	@SuppressWarnings("unlikely-arg-type")
+	public void recommendCourse(HttpServletRequest req) {
+		// 지역 번호 파라미터
+		BigDecimal l_no = new BigDecimal(req.getParameter("l_no"));
+		
+		// 날짜 파라미터
+		String when = req.getParameter("when");
+		String sDate = when.split(",")[0];
+		String eDate = when.split(",")[1];
+		
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date sDay = sdf.parse(sDate);
+			Date eDay = sdf.parse(eDate);
+			// 날짜간 차이 구하기
+			long dif = (eDay.getTime() - sDay.getTime()) / (24*60*60*1000);
+			
+			// 여행기간
+			long term = dif+1;
+			
+		
+			// 카테고리 파라미터
+			String cats = req.getParameter("cats");
+			// 사용자가 고른 카테고리들
+			String arrCat[] = cats.split(",");
+			// 빈 사용자 카테고리 리스트
+			List<BigDecimal> userCats = new ArrayList<BigDecimal>();
+			// 형변환
+			for (String c : arrCat) {
+				userCats.add(new BigDecimal(c));
+			}
+			
+			// 이 지역에서 할 수 있는 카테고리들
+			List<BigDecimal> locCats = new ArrayList<BigDecimal>(ss.getMapper(RecommendLocMapper.class).getCateByLoc(l_no));
+			// 사용자 카테고리와 지역 카테고리 중 중복값
+			locCats.retainAll(userCats);
+			
+			// 중복된 값을 분류
+			int catNum = 0;
+			
+			List<BigDecimal> acts = new ArrayList<BigDecimal>();
+			List<BigDecimal> others = new ArrayList<BigDecimal>();
+			List<BigDecimal> tastes = new ArrayList<BigDecimal>();
+			
+			for (BigDecimal q : locCats) {
+				catNum = q.intValue();
+				
+				if (catNum/100 == 4) { // 4xx : 액티비티
+					acts.add(q);
+				} else if(catNum / 100 == 1){ // 맛집
+					tastes.add(q);
+				} else { // 그 외 활동들
+					others.add(q);
+				}
+			}
+			Random r = new Random();
+			
+			// 장소 배열(전체 장소)
+			List<BigDecimal> allSpot = new ArrayList<BigDecimal>();
+			// 리스트 리스트(2차)
+			List<List<BigDecimal>> arrSpots = new ArrayList<List<BigDecimal>>();
+
+			// 여행 기간만큼 반복
+			for (long i = 0; i < term ; i++) {
+				int randIndex = 0; 
+				// 장소 배열(날짜 마다 장소)
+				List<BigDecimal> arrSpot = new ArrayList<BigDecimal>();
+				if (i == 0) { // 첫날이라면
+					if (acts.size() != 0) { // 액티비티 선택했는가?
+						
+						if (tastes.size() != 0) { // 맛집을 선택했는가?
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(101)));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, acts.get(0)));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(101)));
+							allSpot.addAll(arrSpot);
+							arrSpots.add(arrSpot);
+						} else { // 맛집 선택 x
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(104)));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, acts.get(0)));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(104)));
+							allSpot.addAll(arrSpot);
+							arrSpots.add(arrSpot);
+						}
+					} else { // 액티비티를 선택하지 않았는가?
+						if (tastes.size() != 0) { // 맛집을 선택했는가?
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(101)));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(101)));
+							allSpot.addAll(arrSpot);
+							arrSpots.add(arrSpot);
+						} else { // 맛집 선택 x
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(104)));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(104)));
+							allSpot.addAll(arrSpot);
+							arrSpots.add(arrSpot);
+						}
+					}
+				}else { // 첫날이 아니라면
+					if (acts.size() != 0) { // 액티비티 선택했는가?
+						
+						if (tastes.size() != 0) { // 맛집을 선택했는가?
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(101)));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, acts.get(0)));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(101)));
+							allSpot.addAll(arrSpot);
+							arrSpots.add(arrSpot);
+						} else { // 맛집 선택 x
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(104)));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, acts.get(0)));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(104)));
+							allSpot.addAll(arrSpot);
+							arrSpots.add(arrSpot);
+						}
+					} else { // 액티비티를 선택하지 않았는가?
+						if (tastes.size() != 0) { // 맛집을 선택했는가?
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(101)));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(101)));
+							allSpot.addAll(arrSpot);
+							arrSpots.add(arrSpot);
+						} else { // 맛집 선택 x
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(104)));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(others.indexOf(randIndex))));
+								arrSpot.add(ss.getMapper(RecommendLocMapper.class).getRandomSpot(l_no, new BigDecimal(104)));
+							allSpot.addAll(arrSpot);
+							arrSpots.add(arrSpot);
+						}
+					}
+				}
+			}
+		arrSpots.add(0, allSpot);
+		req.setAttribute("arrSpots", arrSpots);
+		
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	} 
+	
 	
 	public void getResult(HttpServletRequest req) {
 		try {
@@ -31,7 +184,7 @@ public class RecommendLocDAO {
 			String Q2 = req.getParameter("Q2");
 			req.setAttribute("when", Q2);
 			String Q4 = req.getParameter("Q4");
-			req.setAttribute("acts", Q4);
+			req.setAttribute("cats", Q4);
 			
 			// Q4 , 기준으로 자르기
 			String arrQ4[] = Q4.split(",");
