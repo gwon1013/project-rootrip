@@ -8,6 +8,10 @@ public interface LocationMapper {
 	public abstract int insertLocation(Location l);
 
 	public abstract List<Location> getAllLocation();
+	
+	public List<Location> getMainLocation();
+	
+	public List<Location> getSubLocation(String l_co);
 
 	public abstract List<Location> getLocation(String l_co);
 

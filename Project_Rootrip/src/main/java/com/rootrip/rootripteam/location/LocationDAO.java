@@ -145,4 +145,12 @@ public class LocationDAO {
 	public List<Location> getAllLocation() {
 		return ss.getMapper(LocationMapper.class).getAllLocation();
 	}
+	
+	public List<Location> getMainLocation(){
+		return ss.getMapper(LocationMapper.class).getMainLocation();
+	}
+	
+	public List<Location> getSubLocation(String l_no){
+		return ss.getMapper(LocationMapper.class).getSubLocation(l_no);
+	}
 }
