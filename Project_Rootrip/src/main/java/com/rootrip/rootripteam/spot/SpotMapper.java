@@ -1,5 +1,7 @@
 package com.rootrip.rootripteam.spot;
 
+import java.util.List;
+
 public interface SpotMapper {
 	public abstract int insertMarket(Market m);
 
@@ -24,4 +26,8 @@ public interface SpotMapper {
 	public abstract int insertActivity(Activity a);
 
 	public abstract int insertActivity2(Activity a);
+	
+	public abstract List<Spot> getSpotList(int p);
+	
+	public abstract int getAllSpotCount();
 }

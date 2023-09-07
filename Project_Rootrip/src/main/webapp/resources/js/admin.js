@@ -58,6 +58,10 @@ function kickUser(mail) {
 	}
 }
 
+function goManageSpots(p){
+	location.href="admin.spots?p="+p;
+}
+
 $(function(){
 	let searchParams = new URLSearchParams(window.location.search);
 	let mail = searchParams.get('mail');
@@ -83,5 +87,7 @@ $(function(){
 		}
 	})
 })
+
+
 
 

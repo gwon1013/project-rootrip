@@ -37,4 +37,8 @@ public class CategoryDAO {
 
 		return result;
 	}
+	
+	public List<Category> getAllCategory(){
+		return ss.getMapper(CategoryMapper.class).getAllCategory();
+	}
 }

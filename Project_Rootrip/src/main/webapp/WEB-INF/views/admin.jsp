@@ -10,6 +10,6 @@
 <body>
 	<button onclick="goManageUsers(1)">회원 관리</button>
 	<button onclick="goManageLocation(1)">지역 관리</button>
-	<button>장소 관리</button>
+	<button onclick="goManageSpots(1)">장소 관리</button>
 </body>
 </html>

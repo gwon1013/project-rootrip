@@ -18,6 +18,14 @@ public class SpotDAO {
 	private SqlSession ss;
 	@Autowired
 	private CategoryDAO cDAO;
+	
+	public List<Spot> getSpotList(int p){
+		return ss.getMapper(SpotMapper.class).getSpotList(p);
+	}
+	
+	public int getAllSpotCount() {
+		return ss.getMapper(SpotMapper.class).getAllSpotCount();
+	}
 
 	public int insertDataToDB(String category, List<String[]> data) {
 		int categoryCode = cDAO.getCategoryCode(category);
