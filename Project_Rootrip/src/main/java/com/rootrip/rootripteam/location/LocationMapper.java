@@ -1,5 +1,6 @@
 package com.rootrip.rootripteam.location;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -12,6 +13,8 @@ public interface LocationMapper {
 	public List<Location> getMainLocation();
 	
 	public List<Location> getSubLocation(String l_co);
+	
+	public List<BigDecimal> getSubLocationCode (String l_no);
 
 	public abstract List<Location> getLocation(String l_co);
 

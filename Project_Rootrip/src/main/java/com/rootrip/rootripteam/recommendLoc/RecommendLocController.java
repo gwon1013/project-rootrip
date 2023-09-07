@@ -41,7 +41,6 @@ public class RecommendLocController {
 	public String goMap(HttpServletRequest req) {
 		mDAO.loginCheck(req);
 		lDAO.recommendCourse(req);
-		req.setAttribute("contentPage", "#");
-		return "index";
+		return "map";
 	}
 }

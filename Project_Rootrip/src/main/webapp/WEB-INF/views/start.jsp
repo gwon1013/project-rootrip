@@ -37,7 +37,7 @@
 	</div>
 	<br>
 		<section class="button2-container">
-		<a href="#" >내가 알아서 할게 ~ </a>
+		<a href="map.go" >내가 알아서 할게 ~ </a>
 		</section>
 		</td>
 	</tr>

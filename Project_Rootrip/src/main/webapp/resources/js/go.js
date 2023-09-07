@@ -12,3 +12,7 @@ function goDrop(){
 function goQuestion(){
 	location.href="recommendLoc.question.go";
 }
+
+function goMap(){
+	location.href="map.go";
+}

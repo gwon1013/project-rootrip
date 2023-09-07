@@ -43,4 +43,69 @@
 	<select id="getAllSpotCount" resultType="int">
 		select count(s_no) from SPOT
 	</select>
+	<select id="getSpotWithCate" resultType="com.rootrip.rootripteam.spot.Spot">
+		select * from SPOT where c_no in
+		<foreach collection="list" item="c_no" open="(" separator="," close=")">
+			#{c_no}
+		</foreach>
+	</select>
+	<select id="getSpotWithLoc" resultType="com.rootrip.rootripteam.spot.Spot">
+		select * from SPOT where l_no in
+		<foreach collection="list" item="l_no" open="(" separator="," close=")">
+			#{l_no}
+		</foreach>
+	</select>
+	
+	<select id="getSpotWithCateLoc" resultType="com.rootrip.rootripteam.spot.Spot">
+		select * from (
+			select * from SPOT where c_no in 
+			<foreach collection="arg0" item="c_no" open="(" separator="," close=")">
+			#{c_no}
+			</foreach>
+		) where l_no in
+		<foreach collection="arg1" item="l_no" open="(" separator="," close=")">
+			#{l_no}
+		</foreach>
+	</select>
+	
+	<select id="getSpotWithName" resultType="com.rootrip.rootripteam.spot.Spot">
+		select * from SPOT where s_name LIKE '%'||#{name}||'%'
+	</select>
+	
+	<select id="getSpotWithNumber" resultType="com.rootrip.rootripteam.spot.Spot">
+		select * from SPOT where s_no = #{s_no}
+	</select>
+	
+	<select id="getSpotWithCateName" resultType="com.rootrip.rootripteam.spot.Spot">
+		select * from (
+			select * from SPOT where c_no in
+			<foreach collection="arg0" item="c_no" open="(" separator="," close=")">
+				#{c_no}
+			</foreach>
+		) where s_name LIKE '%'||#{name}||'%'
+		
+	</select>
+	
+	<select id="getSpotWithLocName" resultType="com.rootrip.rootripteam.spot.Spot">
+		select * from (
+			select * from SPOT where l_no in
+			<foreach collection="arg0" item="l_no" open="(" separator="," close=")">
+				#{l_no}
+			</foreach>
+		) where s_name LIKE '%'||#{name}||'%'
+	</select>
+	
+	<select id="getSpotWithCateLocName" resultType="com.rootrip.rootripteam.spot.Spot">
+		select * from (
+			select * from (
+				select * from SPOT where c_no in 
+				<foreach collection="arg0" item="c_no" open="(" separator="," close=")">
+					#{c_no}
+				</foreach>
+			) where l_no in
+			<foreach collection="arg1" item="l_no" open="(" separator="," close=")">
+				#{l_no}
+			</foreach>
+		) where s_name LIKE '%'||#{name}||'%'
+	</select>
 </mapper>

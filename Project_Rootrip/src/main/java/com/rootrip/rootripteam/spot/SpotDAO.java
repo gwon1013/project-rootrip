@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,38 @@ public class SpotDAO {
 	
 	public int getAllSpotCount() {
 		return ss.getMapper(SpotMapper.class).getAllSpotCount();
+	}
+	
+	public List<Spot> getSpotByCate(List<Integer> categories) {
+		return ss.getMapper(SpotMapper.class).getSpotWithCate(categories);
+	}
+	
+	public List<Spot> getSpotByloc(List<Integer> locations) {
+		return ss.getMapper(SpotMapper.class).getSpotWithLoc(locations);
+	}
+	
+	public List<Spot> getSpotByCateloc(List<Integer> categories, List<Integer> locations) {
+		return ss.getMapper(SpotMapper.class).getSpotWithCateLoc(categories, locations);
+	}
+	
+	public List<Spot> getSpotByName(String name) {
+		return ss.getMapper(SpotMapper.class).getSpotWithName(name);
+	}
+	
+	public List<Spot> getSpotByNum(int number) {
+		return ss.getMapper(SpotMapper.class).getSpotWithNumber(number);
+	}
+	
+	public List<Spot> getSpotByCateName(List<Integer> categories, @Param("name")String name) {
+		return ss.getMapper(SpotMapper.class).getSpotWithCateName(categories, name);
+	}
+	
+	public List<Spot> getSpotBylocName(List<Integer> locations, @Param("name")String name) {
+		return ss.getMapper(SpotMapper.class).getSpotWithLocName(locations, name);
+	}
+	
+	public List<Spot> getSpotByCatelocName(List<Integer> categories, List<Integer> locations, @Param("name")String name) {
+		return ss.getMapper(SpotMapper.class).getSpotWithCateLocName(categories, locations, name);
 	}
 
 	public int insertDataToDB(String category, List<String[]> data) {
