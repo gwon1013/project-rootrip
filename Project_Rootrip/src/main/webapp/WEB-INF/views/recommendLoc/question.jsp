@@ -7,6 +7,11 @@
 <title>question.jsp</title>
 <link rel="stylesheet" href="resources/css/startPage.css" type="text/css" />
 <link rel="stylesheet" href="resources/css/questionmenu.css" />
+<style>
+    #invisibleTb {
+        display: none; /* 테이블 숨김 처리 */
+    }
+</style>
 <script type="text/javascript">
 		// Q1 선택지 리스트
 		let ansQ1 =  [
@@ -240,6 +245,9 @@
 			//}
 			input1 = $("<input type='date' id='sDate' name='Q2' />");
 			input2 = $("<input type='date' id='eDate' name='Q2'onchange='getQ2Val();'/>");
+			
+			input1.css("margin-right", "20px");
+			
 			td2.append(input1,input2);
 			tr2.append(td2);
 			$("#q4_options").before(tr1, tr2);
