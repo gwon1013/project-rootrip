@@ -138,14 +138,24 @@ function getSubLoc(l_no, l_name) {
 		</c:forEach>
 	</div>
 	<div>
-		<c:forEach begin="1" end="${all }" var="page">
+		<!-- prev 버튼 -->
+		<c:if test="${begin != 1 }">
+			<span>prev</span>
+		</c:if>
+		
+		<c:forEach begin="${begin }" end="${end }" var="page">
 			<c:if test="${param.query == null }">
-				<span  onclick="goManageLocation(${page})">${page }</span>
+					<span  onclick="goManageLocation(${page})">${page }</span>
 			</c:if>
 			<c:if test="${param.query != null }">
 				<span  onclick="goManageLocationWithName('${param.query }', ${page})">${page }</span>
 			</c:if>
 		</c:forEach>
+		
+		<!-- next 버튼 -->
+		<c:if test="${end != all }">
+			<span>next</span>
+		</c:if>
 	</div>
 	<div><input type="text" id="location_name" value=''><button id="search_btn" onclick="searchSpot();">검색</button></div>
 </body>

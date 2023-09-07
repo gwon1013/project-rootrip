@@ -185,6 +185,13 @@ public class AdminController {
 			spots = sDAO.getSpotList(p);
 			all = sDAO.getAllSpotCount();
 			all = calcPageCount30(all);
+			int begin = ((p-1)/10)*10 + 1;
+			int end = begin + 9;
+			if (end > all) {
+				end = all;
+			}
+			req.setAttribute("begin", begin);
+			req.setAttribute("end", end);
 			req.setAttribute("spots", spots);
 			req.setAttribute("p", p);
 			req.setAttribute("all", all);
@@ -202,6 +209,6 @@ public class AdminController {
 		return (all % 10 == 0) ? all / 10 : (all / 10) + 1;
 	}
 	private int calcPageCount30(int all) {
-		return (all % 10 == 0) ? all / 10 : (all / 10) + 1;
+		return (all % 30 == 0) ? all / 30 : (all / 30) + 1;
 	}
 }
