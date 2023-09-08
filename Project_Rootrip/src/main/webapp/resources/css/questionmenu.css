@@ -156,7 +156,7 @@ tr{
 
 
 
-#resultTB{
+.resultTB{
 	border-radius: 10px;
 	border:solid;
 	background-color: white;
@@ -174,16 +174,6 @@ a{
 	width: 280px;
 	height: 80px;
 } 
-.locationimage::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 285px;
-    height: 85px; /* 세미콜론 추가 */
-    background: linear-gradient(to bottom right, transparent, white);
-    opacity: 0.5;
-}
 
 .text-overlay {
     position: absolute;
@@ -192,3 +182,24 @@ a{
     padding: 5px;
     background-color:white;
 }
+.resultTB {
+    display: inline-block; /* 테이블을 인라인 블록 요소로 표시 */
+    margin-right: 20px; /* 각 테이블 사이의 간격 설정 */
+    vertical-align: top; /* 테이블을 상단 정렬 */
+    width: 300px; /* 각 테이블의 너비 설정 */
+}
+
+.resultTB tr {
+        margin-bottom: 60px; 
+    }
+
+.resultTB td {
+        padding-top: 20px; 
+        padding-bottom: 20px;
+    }
+    
+
+
+
+
+
