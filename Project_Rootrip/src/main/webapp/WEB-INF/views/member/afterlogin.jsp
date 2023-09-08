@@ -12,6 +12,8 @@
 		display: inline-block;
 		border-radius: 70%;
 		margin-left: 100px;
+		width: 56px;
+    	height: 46px;
 		
 	}
 	.options {         
@@ -26,8 +28,9 @@
             position: absolute;
             left: 130px;
             top: 80px;
-            background-color: #00A2E8; 
-            padding: 10px;           
+            background-color: none; 
+            padding: 4px;    
+                
         }      
 </style>
 </head>
