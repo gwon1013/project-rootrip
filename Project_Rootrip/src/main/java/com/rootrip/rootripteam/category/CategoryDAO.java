@@ -37,8 +37,17 @@ public class CategoryDAO {
 
 		return result;
 	}
-	
-	public List<Category> getAllCategory(){
+
+	public List<Category> getAllCategory() {
 		return ss.getMapper(CategoryMapper.class).getAllCategory();
 	}
+	
+	public List<Category> getMainLocation(){
+		return ss.getMapper(CategoryMapper.class).getMainCategory();
+	}
+	
+	public List<Category> getSubLocation(String c_no){
+		return ss.getMapper(CategoryMapper.class).getSubCategory(c_no);
+	}
+
 }

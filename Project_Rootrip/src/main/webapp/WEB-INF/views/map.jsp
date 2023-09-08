@@ -814,7 +814,10 @@
 				selectDay(start[0]-1900, start[1]-1, Number(start[2]));
 				selectDay(end[0]-1900, end[1]-1, Number(end[2]));
 			}
-			var arrSpots = ${arrSpots};
+			var arrSpots;
+			if ("${arrSpots}" != "") {
+				arrSpots = "${arrSpots}";				
+			}
 			var i = 1;
 			for(i; i<arrSpots.length; i++) {
 				var j = 0;
@@ -837,7 +840,7 @@
 					goBeforeCourse();
 				}
 			}
-		}, 100);
+		}, 200);
 		
 	}
 	
@@ -856,7 +859,7 @@
 				$('.category[value='+cat[i]+']').trigger('click');
 			}
 			searchSpot();
-		},100);
+		},200);
 	}
 	
 	function goBeforeCourse(){

@@ -9,4 +9,8 @@ public interface CategoryMapper {
 	public abstract int insertCategory(Category c);
 	
 	public abstract List<Category> getAllCategory();
+	
+	public abstract List<Category> getMainCategory();
+	
+	public abstract List<Category> getSubCategory(String c_no);
 }
